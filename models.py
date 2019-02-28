@@ -1,8 +1,5 @@
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, OperationalError
-from autoslug import AutoSlugField
-from django.template.defaultfilters import slugify
-from tinymce.models import HTMLField
 import json
 from django.utils import timezone
 from model_utils.models import TimeStampedModel
@@ -16,37 +13,42 @@ from datetime import datetime
 from django.template.defaultfilters import truncatechars
 
 class Competition(models.Model):
-    name = models.CharField(max_length=500, blank=True)
-    season
-    
-class Season(models.Model):
-    years = models.CharField(max_length=500, blank=True)
-    matches
+    name = models.CharField(max_length=500, null =True, blank=True)
+    match = models.CharField(max_length=500, null =True, blank=True)
+    season = models.CharField(max_length=500, null =True, blank=True)
+
     
 class Match(models.Model):
-    match = models.CharField(max_length=500, blank=True)
-    home = models.CharField(max_length=500, blank=True)
-    visitor= models.CharField(max_length=500, blank=True)
-    phome = models.IntegerField(blank=True)
-    pvisitor = models.IntegerField(blank=True)
+    match = models.ForeignKey(Competition)
+    matchday = models.IntegerField(Competition)
+    season = models.CharField(max_length=500, blank=True)
+    local = models.ForeignKey(Team)
+    visitor = models.ForeignKey(Team)
+    #plocal = models.ForeignKey(Team)
+    #pvisitor = models.ForeignKey(Team)
     ghome = models.IntegerField(blank=True)
     gvisitor = models.IntegerField(blank=True)
     result = models.IntegerField(blank=True)
-    alineacionhome =
-    alineacionvisitor =
+    #lineuphome = models.Foreign(max_length=500, blank=True)
+    #lineupvisitor = models.Foreign(max_length=500, blank=True)
+
     
 class Team(models.Model):
-    name =
-    player = 
-    points =
-    gf = 
-    gc =
-    pg =
-    pe =
-    pp =
-    alineacion1
-    ali2
-    ....
+    name = models.CharField(max_length=500, blank=True)
+    player = models.IntegerField(blank=True)
+    points = models.IntegerField(blank=True)
+    gf = models.IntegerField(blank=True)
+    gc = models.IntegerField(blank=True)
+    pg = models.IntegerField(blank=True)
+    pe = models.IntegerField(blank=True)
+    pp = models.IntegerField(blank=True)
+    #lineup = models.CharField(max_length=500, blank=True)
+
+class Player(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    
+    
+    
     
     
     
