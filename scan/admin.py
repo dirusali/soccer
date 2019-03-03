@@ -1,4 +1,5 @@
 from scan.models import Competition, Match, Team, Player
+from django.contrib import admin
 
 
 class CompetitionAdmin(admin.ModelAdmin):
