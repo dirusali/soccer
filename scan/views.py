@@ -5,13 +5,13 @@ from django_filters import rest_framework as filters
 from .models import Competition, Match, Team, Player
 from .serializers import MatchSerializer, TeamSerializer
 
-class MatchFilter(filters.FilterSet):
-    matchday = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
-    local = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
-    visitor = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
-    class Meta:
-        model = Match
-        fields = ['match', 'match', 'matchday', 'local', 'visitor']
+#class MatchFilter(filters.FilterSet):
+#    matchday = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
+#    local = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
+#    visitor = filters.CharFilter(lookup_expr=['icontains','exact', 'iexact'])
+#    class Meta:
+#        model = Match
+#        fields = ['match', 'match', 'matchday', 'local', 'visitor']
         
 class MatchViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -28,4 +28,4 @@ class TeamViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows Shop to be viewed.
     """
     queryset = Team.objects.all()
-    serializer_class = Teamerializer
+    serializer_class = Teamserializer
