@@ -14,7 +14,7 @@ class Player(models.Model):
    
 class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
-    players = Models.ManyToManyField(Player, blank=True, related_name='lineup')
+    players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
