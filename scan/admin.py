@@ -13,7 +13,7 @@ class MatchAdmin(admin.ModelAdmin):
     list_display = ('match', 'matchday', 'local', 'visitor')
     list_filter = ('local',)
     
-admin.site.register(Macth, MacthAdmin)
+admin.site.register(Match, MacthAdmin)
 
 
 class TeamAdmin(admin.ModelAdmin):
