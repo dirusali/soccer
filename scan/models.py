@@ -20,10 +20,8 @@ class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
     lineups = models.ManyToManyField(Lineup, blank=True, related_name='team')
     points = models.IntegerField(blank=True)
-    golesfavor = models.IntegerField(blank=True)
-    golescontra  = models.IntegerField(blank=True)
     matches_won = models.IntegerField(blank=True)
-    matches_ = models.IntegerField(blank=True)
+    matches_tied = models.IntegerField(blank=True)
     matches_lost= models.IntegerField(blank=True)
     
 class Match(models.Model):
