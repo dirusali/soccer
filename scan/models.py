@@ -11,13 +11,17 @@ from django.template.defaultfilters import truncatechars
 
 class Player(models.Model):
     name = models.CharField(max_length=500, blank=True)
-   
+    team = models.ForeignKey(Team)
+    position = models.CharField(max_length=500, blank=True)
+    age = models.IntegerField(blank=True)
+    
 class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
     players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
+    identificador = models.IntegerField(blank=True)
     lineups = models.ManyToManyField(Lineup, blank=True, related_name='team')
    # points = models.IntegerField(blank=True)
    # matches_won = models.IntegerField(blank=True)
