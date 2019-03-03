@@ -17,13 +17,13 @@ admin.site.register(Match, MatchAdmin)
 
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'coach']
     list_filter = ('name',)
 
 admin.site.register(Team, TeamAdmin)
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'position', 'age']
     list_filter = ('name',)
 
 admin.site.register(Player, PlayerAdmin)
