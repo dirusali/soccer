@@ -23,7 +23,7 @@ class Command(BaseCommand):
                 for p in squad:
                     if p['role'] == 'PLAYER':
                         edad = 2019 - int(p['dateOfBirth'][0:4])
-                        i.player_set.create(name = p['id'], position = p['position'], age = edad)
+                        i.player_set.create(name = str(p['id']), position = p['position'], age = edad)
                         print('Created player %s' % p['name'])
                     if p['role'] == 'COACH':
                         i.coach = p['name']
