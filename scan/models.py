@@ -25,7 +25,7 @@ class Team(models.Model):
     matches_lost= models.IntegerField(blank=True)
     
 class Match(models.Model):
-    teams = lineups = Models.ManyToManyField(Team, blank=True, related_name='match')
+    teams = lineups = Mmdels.ManyToManyField(Team, blank=True, related_name='match')
     matchday = models.IntegerField(blank=True)
     #local = models.ForeignKey(Team)
     #visitor = models.ForeignKey(Team)
