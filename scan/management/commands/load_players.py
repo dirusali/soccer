@@ -17,7 +17,7 @@ class Command(BaseCommand):
             id = str(i.identificador)
             url = 'http://api.football-data.org/v2/teams/' + id
             response = equests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
-            squad = json.loads(r.text)['squad']
+            squad = json.loads(response.text)['squad']
             for p in squad:
                 if p['role'] == 'PLAYER':
                     edad = 2019 - int(p['dateOfBirth'][0:4])
@@ -25,6 +25,7 @@ class Command(BaseCommand):
                     name=i['name'],
                     position=i['position'],
                     age=edad)
+                    i.save()
                     print('Created player %s' % name)
              print('CREATED PLAYERS FOR TEAM %s' % i.name)
     print('process finished')        
