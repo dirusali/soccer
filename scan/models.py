@@ -40,7 +40,6 @@ class Match(models.Model):
 
 class Competition(models.Model):
     name = models.CharField(max_length=500, null =True, blank=True)
-    match = models.ForeignKey(Match)
 
     
     
