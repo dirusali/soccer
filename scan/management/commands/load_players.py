@@ -27,5 +27,5 @@ class Command(BaseCommand):
                     age=edad)
                     i.save()
                     print('Created player %s' % name)
-             print('CREATED PLAYERS FOR TEAM %s' % id)
+            print('CREATED PLAYERS FOR TEAM %s' % id)
     print('process finished')        
