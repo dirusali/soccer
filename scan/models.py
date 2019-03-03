@@ -11,28 +11,31 @@ from django.template.defaultfilters import truncatechars
 
 class Player(models.Model):
     name = models.CharField(max_length=500, blank=True)
+   
+class Lineup(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    players = Models.ManyToManyField(Player, blank=True, related_name='lineup')
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
-    player = models.ForeignKey(Player)
+    lineups = Models.ManyToManyField(Lineup, blank=True, related_name='team')
     points = models.IntegerField(blank=True)
-   # gf = models.IntegerField(blank=True)
-   # gc = models.IntegerField(blank=True)
-   # pg = models.IntegerField(blank=True)
-   # pe = models.IntegerField(blank=True)
-   # pp = models.IntegerField(blank=True)
-    #lineup = models.CharField(max_length=500, blank=True)    
+    golesfavor = models.IntegerField(blank=True)
+    golescontra  = models.IntegerField(blank=True)
+    matches_won = models.IntegerField(blank=True)
+    matches_ = models.IntegerField(blank=True)
+    matches_lost= models.IntegerField(blank=True)
     
 class Match(models.Model):
-    name = models.CharField(max_length=500, null =True, blank=True)
+    teams = lineups = Models.ManyToManyField(Team, blank=True, related_name='match')
     matchday = models.IntegerField(blank=True)
-    local = models.ForeignKey(Team)
-    visitor = models.ForeignKey(Team)
+    #local = models.ForeignKey(Team)
+    #visitor = models.ForeignKey(Team)
     #plocal = models.ForeignKey(Team)
     #pvisitor = models.ForeignKey(Team)
-    ghome = models.IntegerField(blank=True)
-    gvisitor = models.IntegerField(blank=True)
-    result = models.IntegerField(blank=True)
+    #ghome = models.IntegerField(blank=True)
+    #gvisitor = models.IntegerField(blank=True)
+    #result = models.IntegerField(blank=True)
     #lineuphome = models.Foreign(max_length=500, blank=True)
     #lineupvisitor = models.Foreign(max_length=500, blank=True)
 
