@@ -22,10 +22,12 @@ class Command(BaseCommand):
                 if p['role'] == 'PLAYER':
                     edad = 2019 - int(p['dateOfBirth'][0:4])
                     i.player_set.create(
-                    name=i['name'],
-                    position=i['position'],
-                    age=edad)
-                    i.save()
+                    name = p['name'],
+                    position = p['position'],
+                    age = edad)
                     print('Created player %s' % name)
+                if p['role'] == 'COACH':
+                    i.coach = p['name']
+                    i.save()
             print('CREATED PLAYERS FOR TEAM %s' % id)
     print('process finished')        
