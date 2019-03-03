@@ -2,9 +2,6 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, OperationalError
 import json
 from django.utils import timezone
-from model_utils.models import TimeStampedModel
-from lxml import html
-import collections
 import logging
 from django.db.models import Count
 from django.urls import reverse
