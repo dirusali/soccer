@@ -15,6 +15,17 @@ class Competition(models.Model):
     season = models.CharField(max_length=500, null =True, blank=True)
 
     
+class Team(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    player = models.IntegerField(blank=True)
+    points = models.IntegerField(blank=True)
+    gf = models.IntegerField(blank=True)
+    gc = models.IntegerField(blank=True)
+    pg = models.IntegerField(blank=True)
+    pe = models.IntegerField(blank=True)
+    pp = models.IntegerField(blank=True)
+    #lineup = models.CharField(max_length=500, blank=True)    
+    
 class Match(models.Model):
     match = models.ForeignKey(Competition)
     matchday = models.IntegerField(Competition)
@@ -29,17 +40,6 @@ class Match(models.Model):
     #lineuphome = models.Foreign(max_length=500, blank=True)
     #lineupvisitor = models.Foreign(max_length=500, blank=True)
 
-    
-class Team(models.Model):
-    name = models.CharField(max_length=500, blank=True)
-    player = models.IntegerField(blank=True)
-    points = models.IntegerField(blank=True)
-    gf = models.IntegerField(blank=True)
-    gc = models.IntegerField(blank=True)
-    pg = models.IntegerField(blank=True)
-    pe = models.IntegerField(blank=True)
-    pp = models.IntegerField(blank=True)
-    #lineup = models.CharField(max_length=500, blank=True)
 
 class Player(models.Model):
     name = models.CharField(max_length=500, blank=True)
