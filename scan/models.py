@@ -8,15 +8,10 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 from datetime import datetime
 from django.template.defaultfilters import truncatechars
-
-
-    
-
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
     identificador = models.IntegerField(blank=True)
-    lineups = models.ManyToManyField(Lineup, blank=True, related_name='team')
    # points = models.IntegerField(blank=True)
    # matches_won = models.IntegerField(blank=True)
     #matches_tied = models.IntegerField(blank=True)
@@ -30,8 +25,8 @@ class Player(models.Model):
     
 class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
-    players = models.ManyToManyField(Player, blank=True, related_name='lineup')
-    
+    players = models.ManyToManyField(Player, blank=True, related_name='lineup') 
+      
 class Match(models.Model):
     teams = models.ManyToManyField(Team, blank=True, related_name='match')
     matchday = models.IntegerField(blank=True)
