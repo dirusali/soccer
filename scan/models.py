@@ -35,6 +35,7 @@ class Match(models.Model):
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
+    identificador = models.IntegerField(blank=True)
     player = models.IntegerField(blank=True)
     points = models.IntegerField(blank=True)
     gf = models.IntegerField(blank=True)
