@@ -28,4 +28,4 @@ class TeamViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows Shop to be viewed.
     """
     queryset = Team.objects.all()
-    serializer_class = Teamserializer
+    #serializer_class = Teamserializer
