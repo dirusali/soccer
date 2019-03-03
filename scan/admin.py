@@ -10,20 +10,20 @@ admin.site.register(Competition, CompetitionAdmin)
 
 
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('matchday')
+    list_display = ['matchday']
     list_filter = ('matchday',)
     
 admin.site.register(Match, MatchAdmin)
 
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'points')
+    list_display = ['name', 'points']
     list_filter = ('name',)
 
 admin.site.register(Team, TeamAdmin)
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ['name']
     list_filter = ('name',)
 
 admin.site.register(Player, PlayerAdmin)
