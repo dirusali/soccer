@@ -3,8 +3,8 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'competitions', views.ProViewSet)
-router.register(r'matches', views.ShopViewSet)
+router.register(r'teams', views.TeamViewSet)
+router.register(r'matches', views.MatchViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
