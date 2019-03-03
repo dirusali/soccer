@@ -16,7 +16,7 @@ class Command(BaseCommand):
         for i in teams:
             id = str(i.identificador)
             url = 'http://api.football-data.org/v2/teams/' + id
-            response = equests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
+            response = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
             squad = json.loads(response.text)['squad']
             for p in squad:
                 if p['role'] == 'PLAYER':
