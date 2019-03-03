@@ -11,7 +11,7 @@ from django.template.defaultfilters import truncatechars
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
-    identificador = models.IntegerField(blank=True)
+    identificador = models.IntegerField(null=True, blank=True)
    # points = models.IntegerField(blank=True)
    # matches_won = models.IntegerField(blank=True)
     #matches_tied = models.IntegerField(blank=True)
