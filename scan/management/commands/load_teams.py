@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from scan.models import Competition, Match, Team, Player, Lineup
 
 import requests
-import csv
+import json
 
 url = 'http://api.football-data.org/v2/competitions/2014/teams'
 
