@@ -9,15 +9,9 @@ logger = logging.getLogger(__name__)
 from datetime import datetime
 from django.template.defaultfilters import truncatechars
 
-class Player(models.Model):
-    name = models.CharField(max_length=500, blank=True)
-    team = models.ForeignKey(Team)
-    position = models.CharField(max_length=500, blank=True)
-    age = models.IntegerField(blank=True)
+
     
-class Lineup(models.Model):
-    name = models.CharField(max_length=500, blank=True)
-    players = models.ManyToManyField(Player, blank=True, related_name='lineup')
+
     
 class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
@@ -27,6 +21,16 @@ class Team(models.Model):
    # matches_won = models.IntegerField(blank=True)
     #matches_tied = models.IntegerField(blank=True)
     #matches_lost= models.IntegerField(blank=True)
+    
+class Player(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    team = models.ForeignKey(Team)
+    position = models.CharField(max_length=500, blank=True)
+    age = models.IntegerField(blank=True)
+    
+class Lineup(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     
 class Match(models.Model):
     teams = models.ManyToManyField(Team, blank=True, related_name='match')
