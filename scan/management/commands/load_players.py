@@ -4,6 +4,7 @@ from scan.models import Competition, Match, Team, Player, Lineup
 
 import requests
 import json
+import time
 
 urlteams = 'http://api.football-data.org/v2/competitions/2014/teams'
 
@@ -22,11 +23,12 @@ class Command(BaseCommand):
                 for p in squad:
                     if p['role'] == 'PLAYER':
                         edad = 2019 - int(p['dateOfBirth'][0:4])
-                        i.player_set.create(name = p['name'], position = p['position'], age = edad)
+                        i.player_set.create(name = p['id'], position = p['position'], age = edad)
                         print('Created player %s' % p['name'])
                     if p['role'] == 'COACH':
                         i.coach = p['name']
                         i.save()
+                    time.sleep(2)    
             except Exception as e:
                 print(e)
                 pass
