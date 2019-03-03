@@ -17,7 +17,7 @@ admin.site.register(Match, MatchAdmin)
 
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'points']
+    list_display = ['name']
     list_filter = ('name',)
 
 admin.site.register(Team, TeamAdmin)
