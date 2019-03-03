@@ -4,7 +4,6 @@ from . import views
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
-from django.contrib.auth.views.LoginView import LoginView
 
 
 router = routers.DefaultRouter()
@@ -15,5 +14,5 @@ router.register(r'matches', views.MatchViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
