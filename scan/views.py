@@ -20,7 +20,7 @@ class MatchViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Match.objects.all()
     serializer_class = MatchSerializer
     filter_backends = (filters.DjangoFilterBackend, SearchFilter)
-    filter_class = MatchFilter
+   # filter_class = MatchFilter
     search_fields = ('match', 'matchday', 'local', 'visitor')
 
 class TeamViewSet(viewsets.ReadOnlyModelViewSet):
