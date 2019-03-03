@@ -46,6 +46,9 @@ class Team(models.Model):
 
 class Player(models.Model):
     name = models.CharField(max_length=500, blank=True)
+    team = models.ForeignKey(Team)
+    position = models.CharField(max_length=500, blank=True)
+    age = models.IntegerField(blank=True)
     
     
     
