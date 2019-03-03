@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from scan.models import 
+from scan.models import Team, Match
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
