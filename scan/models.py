@@ -29,8 +29,8 @@ class Lineup(models.Model):
     goalscounter = models.IntegerField(null=True,blank=True)
       
 class Match(models.Model):
-    local = models.ForeignKey(Team, null=True, blank=True)
-    visitor = models.ForeignKey(Team, null=True, blank=True)
+    local = models.ForeignKey(Team, null=True, blank=True, related_name='localteam')
+    visitor = models.ForeignKey(Team, null=True, blank=True, related_name='visitorteam')
     matchday = models.IntegerField(blank=True)
     
 class Competition(models.Model):
