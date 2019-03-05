@@ -1,4 +1,4 @@
-from scan.models import Competition, Match, Team, Player
+from scan.models import Competition, Match, Team, Player, Lineup
 from django.contrib import admin
 
 
