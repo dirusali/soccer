@@ -27,3 +27,9 @@ class PlayerAdmin(admin.ModelAdmin):
     list_filter = ('name',)
 
 admin.site.register(Player, PlayerAdmin)
+
+class LineupAdmin(admin.ModelAdmin):
+    list_display = ['team', 'players', 'timeplayed', 'goalsfavor', 'goalscounter']
+    list_filter('team',)
+    
+admin.site.register(Lineup, LineupAdmin)
