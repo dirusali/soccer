@@ -13,11 +13,7 @@ class Team(models.Model):
     name = models.CharField(max_length=500, blank=True)
     identificador = models.IntegerField(null=True, blank=True)
     coach = models.CharField(max_length=500, null = True, blank=True)
-   # points = models.IntegerField(blank=True)
-   # matches_won = models.IntegerField(blank=True)
-    #matches_tied = models.IntegerField(blank=True)
-    #matches_lost= models.IntegerField(blank=True)
-    
+   
 class Player(models.Model):
     name = models.CharField(max_length=500, blank=True)
     team = models.ForeignKey(Team, null=True, blank=True)
@@ -26,25 +22,17 @@ class Player(models.Model):
     
 class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
+    team = team = models.ForeignKey(Team, null=True, blank=True)
     players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     timeplayed = models.IntegerField(null=True,blank=True)
     goalsfavor = models.IntegerField(null=True,blank=True)
     goalscounter = models.IntegerField(null=True,blank=True)
       
 class Match(models.Model):
-    teams = models.ManyToManyField(Team, blank=True, related_name='match')
+    local = models.ForeignKey(Team, null=True, blank=True)
+    visitor = models.ForeignKey(Team, null=True, blank=True)
     matchday = models.IntegerField(blank=True)
-    #local = models.ForeignKey(Team)
-    #visitor = models.ForeignKey(Team)
-    #plocal = models.ForeignKey(Team)
-    #pvisitor = models.ForeignKey(Team)
-    #ghome = models.IntegerField(blank=True)
-    #gvisitor = models.IntegerField(blank=True)
-    #result = models.IntegerField(blank=True)
-    #lineuphome = models.Foreign(max_length=500, blank=True)
-    #lineupvisitor = models.Foreign(max_length=500, blank=True)
-
-
+    
 class Competition(models.Model):
     name = models.CharField(max_length=500, null =True, blank=True)
 
