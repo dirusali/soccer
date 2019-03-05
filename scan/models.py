@@ -22,7 +22,7 @@ class Player(models.Model):
     
 class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
-    team = team = models.ForeignKey(Team, null=True, blank=True)
+    team = models.ForeignKey(Team, null=True, blank=True)
     players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     timeplayed = models.IntegerField(null=True,blank=True)
     goalsfavor = models.IntegerField(null=True,blank=True)
