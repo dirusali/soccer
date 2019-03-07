@@ -27,8 +27,8 @@ class Command(BaseCommand):
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
-                print('EL EQUIPO LOCAL ES %s' % local)
-                print('EL EQUIPO VISITANTE ES %s' % visitor)
+                print('EL EQUIPO LOCAL ES %s' % l)
+                print('EL EQUIPO VISITANTE ES %s' % v)
                 casa = Team.objects.get(name=l)
                 fuera = Team.objects.get(name=v)
                 print('CREANDO PARTIDO CON EKIPOS %s Y %s' % (casa,fuera))
