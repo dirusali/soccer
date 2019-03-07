@@ -16,19 +16,27 @@ class Command(BaseCommand):
         teams = Team.objects.all()
         for i in teams:
             try:
-                id = str(i.identificador)
-                url = 'http://api.football-data.org/v2/teams/' + id
-                response = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
-                squad = json.loads(response.text)['squad']
-                for p in squad:
-                    if p['role'] == 'PLAYER':
-                        edad = 2019 - int(p['dateOfBirth'][0:4])
-                        i.player_set.create(name = str(p['id']), position = p['position'], age = edad)
-                        print('Created player %s' % p['name'])
-                    if p['role'] == 'COACH':
-                        i.coach = p['name']
-                        i.save()
-                    time.sleep(2)    
+                print('PROCEDIENDO A AÑADIR ALINEACIONES')
+            local_lineup = []
+            visitor_lineup = []
+            homelineup = json.loads(r.text)['homeTeam']['lineup']
+            awaylineup =  json.loads(r.text)['homeTeam']['lineup']
+            alineacioneslocal = localteam.lineup_set.all()
+            alineacionesvisitante = visitorteam.lineup_set.all()
+            for h in homelineup:
+                local_lineup.append(h['id'])
+            for v in awaylineup:
+                visitor_lineup.append(v['id'])
+        
+            for a in alineacioneslocal:
+                if a.players != local_lineup:
+                    Team.lineup.create(players=local_lineup)
+                else:
+                    print('ESTA ALINEACION YA EXISTE)
+            for a in alineacionesvisitante:
+                if a.players =! visitor_lineup:
+                    Team.lineup.create(players=visitor_lineup)
+             
             except Exception as e:
                 print(e)
                 pass
