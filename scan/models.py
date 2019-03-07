@@ -31,7 +31,7 @@ class Lineup(models.Model):
 class Match(models.Model):
     local = models.ForeignKey(Team, null=True, blank=True, related_name='localteam')
     visitor = models.ForeignKey(Team, null=True, blank=True, related_name='visitorteam')
-    matchday = models.IntegerField(blank=True, null=True)
+    matchid = models.IntegerField(blank=True, null=True)
     
 class Competition(models.Model):
     name = models.CharField(max_length=500, null =True, blank=True)
