@@ -14,6 +14,7 @@ class Command(BaseCommand):
         r = requests.get(urlteams, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
         matches = json.loads(r.text)['matches']
         partidos = []
+        time.sleep(11)
         for i in matches:
             try:
                 p = i['id']
