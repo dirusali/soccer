@@ -16,39 +16,25 @@ class Command(BaseCommand):
         matches = json.loads(r.text)['matches']
         partidos = []
         for i in matches:
-            p = i['id']
-            partidos.append(p)
+            try:
+                p = i['id']
+                partidos.append(p)
+            pass    
         for i in partidos:
-            url = 'http://api.football-data.org/v2/matches/' + str(i)
-            r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
-            local = json.loads(r.text)['homeTeam']['name']
-            visitor = json.loads(r.text)['homeTeam']['name']
-            localteam = Team.objects.get(name=local)
-            visitorteam = Team.objects.get(name=visitor)
-            Match.create(matchid=i['id'], local=local, visitor=visitorteam)
-            print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
+            try:
+                url = 'http://api.football-data.org/v2/matches/' + str(i)
+                r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
+                local = json.loads(r.text)['homeTeam']['name']
+                visitor = json.loads(r.text)['homeTeam']['name']
+                localteam = Team.objects.get(name=local)
+                visitorteam = Team.objects.get(name=visitor)
+                Match.create(matchid=i['id'], local=local, visitor=visitorteam)
+                print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
+            except Exception as e:
+                print(e)
+                pass
             
-            print('PROCEDIENDO A AÑADIR ALINEACIONES')
-            local_lineup = []
-            visitor_lineup = []
-            homelineup = json.loads(r.text)['homeTeam']['lineup']
-            awaylineup =  json.loads(r.text)['homeTeam']['lineup']
-            alineacioneslocal = localteam.lineup_set.all()
-            alineacionesvisitante = visitorteam.lineup_set.all()
-            for h in homelineup:
-                local_lineup.append(h['id'])
-            for v in awaylineup:
-                visitor_lineup.append(v['id'])
-        
-            for a in alineacioneslocal:
-                if a.players != local_lineup:
-                    Team.lineup.create(players=local_lineup)
-                else:
-                    print('ESTA ALINEACION YA EXISTE)
-            for a in alineacionesvisitante:
-                if a.players =! visitor_lineup:
-                    Team.lineup.create(players=visitor_lineup)
-            
+        print('finito')    
     
     
         
