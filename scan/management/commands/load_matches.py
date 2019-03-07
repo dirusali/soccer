@@ -29,8 +29,8 @@ class Command(BaseCommand):
                 visitor = json.loads(r.text)['match']['awayTeam']['name']
                 print('EL EQUIPO LOCAL ES %s' % local)
                 print('EL EQUIPO VISITANTE ES %s' % visitor)
-                localteam = Team.objects.filter(name=local)
-                visitorteam = Team.objects.filter(name=visitor)
+                localteam = Team.objects.get(name=local)
+                visitorteam = Team.objects.get(name=visitor)
                 Match.objects.create(matchid=i, local=localteam, visitor=visitorteam)
                 print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
                 sleep(11)
