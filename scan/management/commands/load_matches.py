@@ -23,11 +23,14 @@ class Command(BaseCommand):
         for i in partidos:
             try:
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
+                print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 local = json.loads(r.text)['match']['homeTeam']['name']
                 visitor = json.loads(r.text)['match']['awayTeam']['name']
-                localteam = Team.objects.get(name=local)
-                visitorteam = Team.objects.get(name=visitor)
+                print('EL EQUIPO LOCAL ES %s' % local)
+                print('EL EQUIPO VISITANTE ES %s' % visitor)
+                localteam = Team.objects.filter(name=local)
+                visitorteam = Team.objects.filter(name=visitor)
                 Match.create(matchid=i, local=localteam, visitor=visitorteam)
                 print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
             except Exception as e:
