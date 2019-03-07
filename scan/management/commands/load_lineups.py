@@ -86,7 +86,7 @@ class Command(BaseCommand):
                 if len(avisitante) == 0:
                     Team.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                 else:
-                    for i in avisitante
+                    for i in avisitante:
                         codigosvisitante.append(lineupid)
                     if lineupid in codigoslocal:
                         pass
