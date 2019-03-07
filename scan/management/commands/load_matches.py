@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 visitor = json.loads(r.text)['match']['awayTeam']['name']
                 localteam = Team.objects.get(name=local)
                 visitorteam = Team.objects.get(name=visitor)
-                Match.create(matchid=i['id'], local=local, visitor=visitorteam)
+                Match.create(matchid=i, local=localteam, visitor=visitorteam)
                 print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
             except Exception as e:
                 print(e)
