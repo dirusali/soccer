@@ -71,27 +71,27 @@ class Command(BaseCommand):
                 codigoslocal = []
                 
                 if len(alocal) == 0:
-                    Team.lineup.create(lineupid=codigolocal, players=local_lineup)
+                    Team.lineup.create(lineupid=codigolocal, team=casa, players=local_lineup)
                 else:
                     for i in alocal:
                         codigoslocal.append(i.linupid)
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        Team.lineup.create(lineup=codigolocal, players=localplayers)
+                        Team.lineup.create(lineupid=codigolocal, team=casa, players=localplayers, )
                         
                 avisitante = fuera.lineup_set.all()
                 codigosvisitante = []
                 
                 if len(avisitante) == 0:
-                    Team.lineup.create(lineup=codigovisitante, players=visitorplayers)
+                    Team.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                 else:
                     for i in avisitante
                         codigosvisitante.append(lineupid)
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        Team.lineup.create(lineup=codigovisitante, players=visitorplayers)
+                        Team.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
              
             except Exception as e:
                 print(e)
