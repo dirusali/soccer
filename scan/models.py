@@ -21,7 +21,7 @@ class Player(models.Model):
     age = models.IntegerField(blank=True, null=True)
     
 class Lineup(models.Model):
-    name = models.CharField(max_length=500, blank=True)
+    lineupid = models.CharField(max_length=500, blank=True)
     team = models.ForeignKey(Team, null=True, blank=True)
     players = models.ManyToManyField(Player, blank=True, related_name='lineup')
     timeplayed = models.IntegerField(null=True,blank=True)
