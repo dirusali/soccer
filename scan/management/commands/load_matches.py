@@ -12,7 +12,6 @@ urlteams = 'http://api.football-data.org/v2/competitions/2014/matches'
 class Command(BaseCommand):
     def handle(self, *args, **options):
         r = requests.get(urlteams, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
-        r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
         matches = json.loads(r.text)['matches']
         partidos = []
         for i in matches:
