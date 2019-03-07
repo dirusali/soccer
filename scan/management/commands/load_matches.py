@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 casa = Team.objects.get(name=l)
                 fuera = Team.objects.get(name=v)
                 print('CREANDO PARTIDO CON EKIPOS %s Y %s' % (casa,fuera))
-                Match.objects.create(matchid=i, local=casa, visitor=fuera)
+                Match.objects.create(local=casa, visitor=fuera, matchid=i)
                 print('CREADO EL PARTIDO %s' % (Match.matchid))
                 sleep(11)
             except Exception as e:
