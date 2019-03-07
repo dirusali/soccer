@@ -11,7 +11,7 @@ admin.site.register(Competition, CompetitionAdmin)
 
 class MatchAdmin(admin.ModelAdmin):
     list_display = ['matchid', 'local', 'visitor']
-    list_filter = ('matchday',)
+    list_filter = ('matchid',)
     
 admin.site.register(Match, MatchAdmin)
 
