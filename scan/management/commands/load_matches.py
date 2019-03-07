@@ -25,7 +25,7 @@ class Command(BaseCommand):
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 local = json.loads(r.text)['homeTeam']['name']
-                visitor = json.loads(r.text)['homeTeam']['name']
+                visitor = json.loads(r.text)['awayTeam']['name']
                 localteam = Team.objects.get(name=local)
                 visitorteam = Team.objects.get(name=visitor)
                 Match.create(matchid=i['id'], local=local, visitor=visitorteam)
