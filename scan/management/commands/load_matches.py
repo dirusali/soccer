@@ -19,7 +19,7 @@ class Command(BaseCommand):
             try:
                 p = i['id']
                 partidos.append(p)
-            excpet:
+            except:
                 pass    
         for i in partidos:
             try:
