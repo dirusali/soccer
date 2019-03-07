@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 print('CREANDO PARTIDO CON EKIPOS %s Y %s' % (casa,fuera))
                 Match.objects.create(local=casa, visitor=fuera, matchid=i)
                 print('CREADO EL PARTIDO %s' % (Match.matchid))
-                time.sleep(11) 
+                time.sleep(12) 
             except Exception as e:
                 print(e)
                 pass
