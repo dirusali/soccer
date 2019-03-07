@@ -31,8 +31,9 @@ class Command(BaseCommand):
                 print('EL EQUIPO VISITANTE ES %s' % visitor)
                 localteam = Team.objects.filter(name=local)
                 visitorteam = Team.objects.filter(name=visitor)
-                Match.create(matchid=i, local=localteam, visitor=visitorteam)
+                Match.objects.create(matchid=i, local=localteam, visitor=visitorteam)
                 print('CREADO EL PARTIDO CON LOS EQUIPOS %s' % (local,visitorteam))
+                sleep(11)
             except Exception as e:
                 print(e)
                 pass
