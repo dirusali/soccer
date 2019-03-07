@@ -19,7 +19,8 @@ class Command(BaseCommand):
             try:
                 p = i['id']
                 partidos.append(p)
-            pass    
+            excpet:
+                pass    
         for i in partidos:
             try:
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
