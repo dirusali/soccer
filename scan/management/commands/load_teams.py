@@ -15,7 +15,7 @@ class Command(BaseCommand):
         count = 0
         for i in equipos:
             count+=1
-            nombre = i['shortName']
+            nombre = i['name']
             id = i['id']
             Team.objects.create(name= nombre,identificador=id)
             print('CREATED TEAM %s' % nombre)
