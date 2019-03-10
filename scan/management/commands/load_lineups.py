@@ -80,7 +80,7 @@ class Command(BaseCommand):
                 codigoslocal = []
                 
                 if len(alocal) == 0:
-                    Lineup.create(lineupid=codigolocal, team=casa, players=local_lineup)
+                    Lineup.objects.create(lineupid=codigolocal, team=casa, players=local_lineup)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in alocal:
@@ -88,14 +88,14 @@ class Command(BaseCommand):
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        Lineup.create(lineupid=codigolocal, team=casa, players=localplayers)
+                        Lineup.objects.create(lineupid=codigolocal, team=casa, players=localplayers)
                         print('CREATED LINEUP %s' % codigolocal)
                          
                 avisitante = fuera.lineup_set.all()
                 codigosvisitante = []
                 
                 if len(avisitante) == 0:
-                    Lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                    Lineup.objects.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in avisitante:
@@ -103,7 +103,7 @@ class Command(BaseCommand):
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        Lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                        Lineup.objects.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                         print('CREATED LINEUP %s' % codigovisitante)
     
             except Exception as e:
