@@ -88,7 +88,7 @@ class Command(BaseCommand):
                 else:
                     for i in alocal:
                         codigoslocal.append(i.lineupid)
-                    if lineupid in codigoslocal:
+                    if codigolocal in codigoslocal:
                         pass
                     else:  
                         Lineup.objects.create(lineupid=codigolocal, team=casa)
@@ -109,7 +109,7 @@ class Command(BaseCommand):
                 else:
                     for i in avisitante:
                         codigosvisitante.append(lineupid)
-                    if lineupid in codigoslocal:
+                    if codigovisitante in codigosvisitante:
                         pass
                     else:  
                         Lineup.objects.create(lineupid=codigovisitante, team=fuera)
