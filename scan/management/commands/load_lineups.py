@@ -81,7 +81,9 @@ class Command(BaseCommand):
                 
                 if len(alocal) == 0:
                     Lineup.objects.create(lineupid=codigolocal, team=casa)
-                    Lineup.objects.update(lineupid=codigolocal, team=casa, players=localplayers)
+                    alineacion = Lineup.objects.get(lineupid=codigolocal)
+                    for p in localplayers:
+                        alineacion.player_set.add(p)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in alocal:
@@ -90,7 +92,9 @@ class Command(BaseCommand):
                         pass
                     else:  
                         Lineup.objects.create(lineupid=codigolocal, team=casa)
-                        Lineup.objects.update(lineupid=codigolocal, team=casa, players=localplayers)
+                        alineacion = Lineup.objects.get(lineupid=codigolocal)
+                         for p in localplayers:
+                             alineacion.player_set.add(p)
                         print('CREATED LINEUP %s' % codigolocal)
                          
                 avisitante = fuera.lineup_set.all()
@@ -98,7 +102,9 @@ class Command(BaseCommand):
                 
                 if len(avisitante) == 0:
                     Lineup.objects.create(lineupid=codigovisitante, team=fuera)
-                    Lineup.objects.update(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                    visitantes = Lineup.objects.get(lineupid=codigovisitante)
+                    for p in visitorplayers:
+                        visitantes.player_set.add(p)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in avisitante:
@@ -107,7 +113,9 @@ class Command(BaseCommand):
                         pass
                     else:  
                         Lineup.objects.create(lineupid=codigovisitante, team=fuera)
-                        Lineup.objects.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                        visitantes = Lineup.objects.get(lineupid=codigovisitante)
+                        for p in visitorplayers:
+                            visitantes.player_set.add(p)
                         print('CREATED LINEUP %s' % codigovisitante)
     
             except Exception as e:
