@@ -87,7 +87,7 @@ class Command(BaseCommand):
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in alocal:
-                        codigoslocal.append(i.linupid)
+                        codigoslocal.append(i.lineupid)
                     if lineupid in codigoslocal:
                         pass
                     else:  
