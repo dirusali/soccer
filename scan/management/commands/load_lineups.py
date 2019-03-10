@@ -74,7 +74,7 @@ class Command(BaseCommand):
                         inicial = str(i)[:1]
                         codigovisitante += inicial
                         visitorplayers.append(player)
-                    except: Exception as e:
+                    except Exception as e:
                         print(e)
                         Player.objects.create(name = str(i))
                         player = Player.objects.get(name=str(i))
