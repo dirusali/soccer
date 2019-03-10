@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 print('PROCEDIENDO A AÑADIR ALINEACIONES')
-                time.sleep(2)
+                time.sleep(5)
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
                 print('EL EQUIPO LOCAL ES %s' % l)
