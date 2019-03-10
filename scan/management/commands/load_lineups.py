@@ -39,7 +39,7 @@ class Command(BaseCommand):
                 local_lineup = []
                 visitor_lineup = []
                 homelineup = json.loads(r.text)['match']['homeTeam']['lineup']
-                awaylineup =  json.loads(r.text)['match']['homeTeam']['lineup']
+                awaylineup =  json.loads(r.text)['match']['awayTeam']['lineup']
                 for h in homelineup:
                     local_lineup.append(h['id'])
                 for v in awaylineup:
