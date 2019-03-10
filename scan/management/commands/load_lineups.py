@@ -55,7 +55,7 @@ class Command(BaseCommand):
                 
                 for i in local_lineup:
                     player = Player.objects.get(name=i)
-                    inicial = i[:1]
+                    inicial = str(i)[:1]
                     codigolocal += inicial
                     localplayers.append(player)
                 print('EL NOMBRE DE LA ALINEACION LOCAL ES %s' % codigolocal)  
