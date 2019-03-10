@@ -54,17 +54,33 @@ class Command(BaseCommand):
                 codigovisitante = ''
                 
                 for i in local_lineup:
-                    player = Player.objects.get(name=str(i))
-                    inicial = str(i)[:1]
-                    codigolocal += inicial
-                    localplayers.append(player)
+                    try:
+                        player = Player.objects.get(name=str(i))
+                        inicial = str(i)[:1]
+                        codigolocal += inicial
+                        localplayers.append(player)
+                    except Exception as e:
+                        print(e)
+                        Player.objects.create(name = str(i))
+                        player = Player.objects.get(name=str(i))
+                        print('Creado el jugador %s' % i)
+                        continue
+
                 print('EL NOMBRE DE LA ALINEACION LOCAL ES %s' % codigolocal)  
                 
                 for i in visitor_lineup:
-                    player = Player.objects.get(name=str(i))
-                    inicial = str(i)[:1]
-                    codigovisitante += inicial
-                    visitorplayers.append(player)
+                    try:
+                        player = Player.objects.get(name=str(i))
+                        inicial = str(i)[:1]
+                        codigovisitante += inicial
+                        visitorplayers.append(player)
+                    except: Exception as e:
+                        print(e)
+                        Player.objects.create(name = str(i))
+                        player = Player.objects.get(name=str(i))
+                        print('Creado el jugador %s' % i)
+                        continue
+    
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % codigovisitante)    
                 
                 alocal = casa.lineup_set.all()
