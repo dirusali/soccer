@@ -93,8 +93,8 @@ class Command(BaseCommand):
                     else:  
                         Lineup.objects.create(lineupid=codigolocal, team=casa)
                         alineacion = Lineup.objects.get(lineupid=codigolocal)
-                         for p in localplayers:
-                             alineacion.player_set.add(p)
+                        for p in localplayers:
+                            alineacion.player_set.add(p)
                         print('CREATED LINEUP %s' % codigolocal)
                          
                 avisitante = fuera.lineup_set.all()
