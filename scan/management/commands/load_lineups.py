@@ -54,14 +54,14 @@ class Command(BaseCommand):
                 codigovisitante = ''
                 
                 for i in local_lineup:
-                    player = Player.objects.get(name=i)
+                    player = Player.objects.get(name=str(i))
                     inicial = str(i)[:1]
                     codigolocal += inicial
                     localplayers.append(player)
                 print('EL NOMBRE DE LA ALINEACION LOCAL ES %s' % codigolocal)  
                 
                 for i in visitor_lineup:
-                    player = Player.objects.get(name=i)
+                    player = Player.objects.get(name=str(i))
                     inicial = str(i)[:1]
                     codigovisitante += inicial
                     visitorplayers.append(player)
@@ -72,6 +72,7 @@ class Command(BaseCommand):
                 
                 if len(alocal) == 0:
                     Team.lineup.create(lineupid=codigolocal, team=casa, players=local_lineup)
+                    print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in alocal:
                         codigoslocal.append(i.linupid)
@@ -86,6 +87,7 @@ class Command(BaseCommand):
                 
                 if len(avisitante) == 0:
                     Team.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                    print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in avisitante:
                         codigosvisitante.append(lineupid)
