@@ -30,7 +30,6 @@ class Command(BaseCommand):
                 time.sleep(12)
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
-                
                 print('EL EQUIPO LOCAL ES %s' % l)
                 print('EL EQUIPO VISITANTE ES %s' % v)
                 
@@ -56,12 +55,10 @@ class Command(BaseCommand):
                 for i in local_lineup:
                     try:
                         player = Player.objects.get(name=str(i))
-                    except Exception as e:
-                        print(e)
-                        casa.player.objects.create(name = str(i))
-                        player = Player.objects.get(name=str(i))
+                    except:
+                        Player.objects.create(name = str(i), team=casa)
                         print('Creado el jugador %s' % i)
-                        continue
+                        player = Player.objects.get(name=str(i))                        
                     inicial = str(i)[:1]
                     codigolocal += inicial
                     localplayers.append(player)
@@ -70,22 +67,20 @@ class Command(BaseCommand):
                 for i in visitor_lineup:
                     try:
                         player = Player.objects.get(name=str(i))
-                    except Exception as e:
-                        print(e)
-                        fuera.player.objects.create(name = str(i))
+                    except:    
+                        Player.objects.create(name = str(i), team=fuera)
                         player = Player.objects.get(name=str(i))
                         print('Creado el jugador %s' % i)
-                        continue
                     inicial = str(i)[:1]
                     codigovisitante += inicial
-                    visitorplayers.append(player)    
+                    visitorplayers.append(player)  
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % codigovisitante)    
                 
                 alocal = casa.lineup_set.all()
                 codigoslocal = []
                 
                 if len(alocal) == 0:
-                    casa.lineup.create(lineupid=codigolocal, team=casa, players=local_lineup)
+                    Lineup.create(lineupid=codigolocal, team=casa, players=local_lineup)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in alocal:
@@ -93,14 +88,14 @@ class Command(BaseCommand):
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        casa.lineup.create(lineupid=codigolocal, team=casa, players=localplayers)
+                        Lineup.create(lineupid=codigolocal, team=casa, players=localplayers)
                         print('CREATED LINEUP %s' % codigolocal)
                          
                 avisitante = fuera.lineup_set.all()
                 codigosvisitante = []
                 
                 if len(avisitante) == 0:
-                    fuera.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                    Lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                     print('PRIMERA ALINEACION CREADA CON ID %s' % codigolocal)
                 else:
                     for i in avisitante:
@@ -108,7 +103,7 @@ class Command(BaseCommand):
                     if lineupid in codigoslocal:
                         pass
                     else:  
-                        fuera.lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
+                        Lineup.create(lineupid=codigovisitante, team=fuera, players=visitorplayers)
                         print('CREATED LINEUP %s' % codigovisitante)
     
             except Exception as e:
