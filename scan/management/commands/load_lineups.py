@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         r = requests.get(urlmatches, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
         matches = json.loads(r.text)['matches']
-        time.sleep(3)
+        time.sleep(11)
         partidos = []
         for i in matches:
             try:
@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 print('PROCEDIENDO A AÑADIR ALINEACIONES')
-                time.sleep(5)
+                time.sleep(10)
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
                 print('EL EQUIPO LOCAL ES %s' % l)
