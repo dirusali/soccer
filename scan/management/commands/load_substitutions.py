@@ -26,16 +26,30 @@ class Command(BaseCommand):
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
-                print('PROCEDIENDO A AÑADIR SUSTITUCIONES')
+                print('---------------llamando API-----------------------')
+                
                 s = json.loads(r.text)['match']['substitutions']
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
                 homelineup = json.loads(r.text)['match']['homeTeam']['lineup']
                 awaylineup =  json.loads(r.text)['match']['awayTeam']['lineup']
+                print('EL EKIPO LOCAL ES %s' % l)
+                print('EL VISITANTE ES %s' % v)
+                print('LOS CAMBIOS SON %s' % s)
+                
                 codigolocal = []
                 codigovisitante = []
                 localplayers = []
-                visitorplayers = []
+                visitorplayers = []            
+                ls = []
+                vs = []
+                tl = []
+                tv = []
+                lg = []
+                vg = []
+                tlg = []
+                lvg = []
+              
                 for h in homelineup:
                     codigolocal.append(str(h['id']))
     
@@ -44,8 +58,9 @@ class Command(BaseCommand):
     
                 local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
-                ls = []
-                vs = []
+                
+                print('LA LINEUP LOCAL ES %s' % codigolocal)
+                print('LA LINEUP VISITANE ES %s' % codigovitante)
                 
                 for i in s:
                     team = i['team']['name']    
@@ -53,26 +68,87 @@ class Command(BaseCommand):
                         ls.append(ls)
                     if team == v:
                         vs.append(vs)
-        
+         
                 for i in ls:
                     time = i['minute']
                     tl.append(time)
                 for i in vs:
                     time = i['minute']
                     tv.append(time)
-
+                
+                print('los cambios locales son en %s y los visitantes en %s' % (tl,tv))    
+                
+                goals = json.loads(r.text)['match']['goals']
+                
+                for i in goals:
+                    team = i['team']['name']    
+                    if team == l:
+                        lg.append(ls)
+                    if team == v:
+                        vg.append(vs)
+                        
+                for i in lg:
+                    time = i['minute']
+                    tlg.append(time)
+                for i in vg:
+                    time = i['minute']
+                    tvg.append(time)        
+                    
+                print('los cambios locales son en %s y los visitantes en %s' % (tlg, tvg))    
+ 
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
-                visitortimes = [y - x for x,y in zip(tv,tv[1:])]   
-                local_lineup.timeplayed = local_lineup.timeplated + localtimes[0]
+                visitortimes = [y - x for x,y in zip(tv,tv[1:])]                  
+                local_lineup.timeplayed  = local_lineup.timeplayed + localtimes[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % localtimes[0])
                 local_lineup.save()
-                visitor_lineup.timeplayed = visitor_lineuo.timeplated + visitortimes[0]
+                visitor_lineup.timeplayed = visitor_lineup.timeplated + visitortimes[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % visitortimes[0])
                 visitor_lineup.save()
+                
+                print('AHORA VAMOS A AÑADIR LOS GOLES')
+                
+                #localgoaltimes = [y - x for x,y in zip(tlg,tlg[1:])]
+                
+                count = 0
+                for goal in lgt:
+                    if goal < localtimes[0]:
+                        count+=1
+                        local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
+                        localgoaltimes = localgoaltimes[1:]
+                        visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
+                        print(count)
+                        print('GOL PRIMERA ALINEACION')
+                        local_lineup.save()
+                        visitor_lineup.save()
+                        prinnt('QUITO GOL')
+                     else:
+                        print('GOLES DE OTRA ALINEACION')
+             
+                #visitorgoaltimes = [y - x for x,y in zip(tvg,tvg[1:])]
+                
+                count = 0
+                for goal in visitortimes:
+                    if goal < localtimes[0]:
+                        count+=1
+                        visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
+                        local_lineup.goalscounter = local_lineup.goalscounter + 1
+                        visitorgoaltimes = localgoaltimes[1:]
+                        local_lineup.save()
+                        visitor_lineup.save()
+                        print(count)
+                        print('GOL PRIMERA ALINEACION')
+                        print('QUITO GOL')
+                     else:
+                        print('GOLES DE OTRA ALINEACION')
+                
+                print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO LOCAL')
                 
                 count= 0
                 for i in ls:
                     count+=1
+                    limitsup = localtimes[count+1]
+                    limitinf = localtimes[count]
+                    tiempo = limitsup - limitinf
                     sale = str(i['playerOut']['id'])
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
@@ -87,13 +163,27 @@ class Command(BaseCommand):
                             print('Creado el jugador %s' % p)
                             player = Player.objects.get(name=str(p))                        
                         localplayers.append(player)
-                    nueva = Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=l, timeplayed = localtimes[count])
+                    Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=l, timeplayed = localtimes[count])
+                    nueva = Lineup.objects.get(lineupid=codigolocal)
+                    for goal in localgoaltimes:
+                        if goal in range(limitinf, limitsup):
+                            nueva.goalsfavor = nueva.goalsfavor + 1
+                            print('GOL AÑADIDO A FAVOR')
+                    for goal in visitorgoaltimes:
+                        if goal in range(limitinf, limitsup):
+                            nueva.goalscounter = nueva.goalscounter + 1
+                            print('GOL AÑADIDO EN CONTRA')        
+                    nueva.save()            
                     print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
 
-        
+                print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO VISINTATE')
+
                 count = 0
                 for i in vs:
                     count+=1
+                    limitsup = visitortimes[count+1]
+                    limitinf = visitortimes[count]
+                    tiempo = limitsup - limitinf
                     sale = str(i['playerOut']['id'])
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
@@ -108,7 +198,17 @@ class Command(BaseCommand):
                             print('Creado el jugador %s' % p)
                             player = Player.objects.get(name=str(p))                        
                         visitorplayers.append(player)
-                    nueva = Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=v, timeplayed = visitortimes[count])
+                    Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=v, timeplayed = tiempo)
+                    nueva = Lineup.objects.get(lineupid=codigovisitante)
+                    for goal in visitorgoaltimes:
+                        if goal in range(limitinf, limitsup):
+                            nueva.goalsfavor = nueva.goalsfavor + 1
+                            print('GOL AÑADIDO A FAVOR')
+                    for goal in localgoaltimes:
+                        if goal in range(limitinf, limitsup):
+                            nueva.goalscounter = nueva.goalscounter + 1
+                            print('GOL AÑADIDO EN CONTRA')        
+                    nueva.save()
                     print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
                              
                              
