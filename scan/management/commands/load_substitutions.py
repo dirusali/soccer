@@ -34,21 +34,24 @@ class Command(BaseCommand):
                 awaylineup =  json.loads(r.text)['match']['awayTeam']['lineup']
                 codigolocal = []
                 codigovisitante = []
+                localplayers = []
+                visitorplayers = []
                 for h in homelineup:
-                    codigolocal.append(str(h['id'])[0])
+                    codigolocal.append(str(h['id']))
     
                 for v in awaylineup:
-                    codigovisitante.append(str(v['id'])[0])
+                    codigovisitante.append(str(v['id']))
     
                 local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                 ls = []
                 vs = []
-                for i in substitutions:
+                
+                for i in s:
                     team = i['team']['name']    
-                    if team == local:
+                    if team == l:
                         ls.append(ls)
-                    if team == visitor:
+                    if team == v:
                         vs.append(vs)
         
                 for i in ls:
@@ -60,22 +63,52 @@ class Command(BaseCommand):
 
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
                 visitortimes = [y - x for x,y in zip(tv,tv[1:])]   
-
-                newlocallineups = []
-                newvisitorlineuos = []
-
-                for i in ls:        
-                    sale = str(i['playerOut']['id'][0])
-                    entra = str(i['playerIn']['id'][0])
-                    newlineup = codigolocal.remove(sale)
-                    newlineup = codigolocal.append(entra)
-                    Lineup.objects.create(players=codigolocal, team=local)
-        
-        
-                for i in vs:
+                local_lineup.timeplayed = local_lineup.timeplated + localtimes[0]
+                print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % localtimes[0])
+                local_lineup.save()
+                visitor_lineup.timeplayed = visitor_lineuo.timeplated + visitortimes[0]
+                print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % visitortimes[0])
+                visitor_lineup.save()
+                
+                count= 0
+                for i in ls:
+                    count+=1
                     sale = str(i['playerOut']['id'])
+                    print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
+                    print('ENTRA EL JUGADOR %s' % entra)
+                    codigolocal = codigolocal.remove(sale)
+                    codigolocal = codigolocal.append(entra)
+                    for p in codigolocal:
+                        try:
+                            player = Player.objects.get(name=str(p))
+                        except:
+                            Player.objects.create(name = str(p), team=l)
+                            print('Creado el jugador %s' % p)
+                            player = Player.objects.get(name=str(p))                        
+                        localplayers.append(player)
+                    nueva = Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=l, timeplayed = localtimes[count])
+                    print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
+
+        
+                count = 0
+                for i in vs:
+                    count+=1
+                    sale = str(i['playerOut']['id'])
+                    print('SALE EL JUGADOR %s' % sale)
+                    entra = str(i['playerIn']['id'])
+                    print('ENTRA EL JUGADOR %s' % entra)
                     codigovisitante.remove(sale)
                     codigovisitante.append(entra)
+                    for p in codigovisitante:
+                        try:
+                            player = Player.objects.get(name=str(p))
+                        except:
+                            Player.objects.create(name = str(p), team=v)
+                            print('Creado el jugador %s' % p)
+                            player = Player.objects.get(name=str(p))                        
+                        visitorplayers.append(player)
+                    nueva = Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=v, timeplayed = visitortimes[count])
+                    print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
                              
                              
