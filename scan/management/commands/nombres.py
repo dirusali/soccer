@@ -24,7 +24,7 @@ class Command(BaseCommand):
                     if p['role'] == 'PLAYER':
                         nombre = p['name']
                         print(nombre)
-                        player = Player.objects.get(name=str(p['id'])
+                        player = Player.objects.get(name=str(p['id']))
                         player.words = nombre
                         player.save()
                         print('Updated player %s' % nombre)
