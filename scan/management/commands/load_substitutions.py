@@ -186,8 +186,8 @@ class Command(BaseCommand):
             
             try:    
                 count = 0
-                if len(tgv) > 0:
-                    for goal in tgv:
+                if len(tvg) > 0:
+                    for goal in tvg:
                         if goal < tv[0]:
                             count+=1
                             visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
