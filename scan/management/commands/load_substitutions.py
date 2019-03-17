@@ -119,6 +119,7 @@ class Command(BaseCommand):
                 print(e)
                 pass
             
+            
             print('los cambios locales son en %s y los visitantes en %s' % (tl,tv))    
            
             try:    
@@ -137,9 +138,13 @@ class Command(BaseCommand):
                 for i in vg:
                     time = i['minute']
                     tvg.append(time)        
-               
+            except Exception as e:
+                print(e)
+                pass
+            
             print('los goles locales son en %s y los visitantes en %s' % (tl,tv))    
- 
+            
+            try:
                 tl.append(93)
                 tv.append(93)
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
