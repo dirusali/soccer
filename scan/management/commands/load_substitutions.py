@@ -137,9 +137,9 @@ class Command(BaseCommand):
                 for i in vg:
                     time = i['minute']
                     tvg.append(time)        
-                    
-                print('los cambios visitantes son en %s y los visitantes en %s' % (tlg, tvg))    
-                
+               
+            print('los goles locales son en %s y los visitantes en %s' % (tl,tv))    
+ 
                 tl.append(93)
                 tv.append(93)
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
