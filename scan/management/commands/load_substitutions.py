@@ -100,7 +100,7 @@ class Command(BaseCommand):
                     visitor_lineup.save()                                                                                                           
                
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)
-                                                  
+                print('el tiempo default visitor es %s' % visitor_lineup.timeplayed)                                  
                 for i in subs:
                     team = i['team']['name']
                     if team == l:
@@ -165,6 +165,7 @@ class Command(BaseCommand):
                 local_lineup.timeplayed  = local_lineup.timeplayed + tl[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % tl[0])
                 local_lineup.save()
+                print('AHORA EL VISITANTE')
                 visitor_lineup.timeplayed = visitor_lineup.timeplayed + tv[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % tv[0])
                 visitor_lineup.save()
