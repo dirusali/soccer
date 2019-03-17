@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         r = requests.get(urlmatches, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
         matches = json.loads(r.text)['matches']
-        sleep(11)
+        sleep(1)
         partidos = []
         for i in matches:
             try:
