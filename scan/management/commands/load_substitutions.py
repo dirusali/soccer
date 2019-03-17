@@ -4,7 +4,7 @@ from scan.models import Competition, Match, Team, Player, Lineup
 
 import requests
 import json
-import time
+from time import sleep
 
 urlmatches = 'http://api.football-data.org/v2/competitions/2014/matches'
 
@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         r = requests.get(urlmatches, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
         matches = json.loads(r.text)['matches']
-        time.sleep(11)
+        sleep(11)
         partidos = []
         for i in matches:
             try:
