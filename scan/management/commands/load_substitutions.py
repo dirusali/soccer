@@ -104,11 +104,13 @@ class Command(BaseCommand):
                                                 
                 for i in s:
                     team = i['team']['name']
-                    print(team)
+                    print(team,l,v)
                     if team == l:
                         ls.append(i)
+                        print('añadido %s' % l)
                     if team == v:
                         vs.append(i)
+                        print('añadido %s' % v)
                 print(ls)
                 print(vs)
                 for i in ls:
@@ -126,6 +128,7 @@ class Command(BaseCommand):
            
             try:    
                 goals = json.loads(r.text)['match']['goals']
+                print('los goles son %s' % goles) 
                 
                 for i in goals:
                     team = i['team']['name']  
