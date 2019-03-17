@@ -128,11 +128,12 @@ class Command(BaseCommand):
                         visitor_lineup.save()
                         prinnt('QUITO GOL')
                      else:
-                        print('GOLES DE OTRA ALINEACION')
+                         print('GOLES DE OTRA ALINEACION')
              
             except Exception as e:
                 print(e)
                 pass#visitorgoaltimes = [y - x for x,y in zip(tvg,tvg[1:])]
+            
             try:    
                 count = 0
                 for goal in visitortimes:
