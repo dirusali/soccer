@@ -49,7 +49,9 @@ class Command(BaseCommand):
                 lg = []
                 vg = []
                 tlg = []
-                lvg = []
+                tvg = []
+                localtimes = []
+                visitortimes = []
               
                 for h in homelineup:
                     codigolocal+=str(h['id'])
@@ -83,7 +85,7 @@ class Command(BaseCommand):
                     players = []
                     Lineup.objects.create(lineupid=codigovisitante, team= visitor)
                     visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
-                    for p in visitorlineup:
+                    for p in awaylineup:
                         try:
                             player = Player.objects.get(name=str(p['id']))
                         except:
@@ -250,7 +252,7 @@ class Command(BaseCommand):
                             print('Creado el jugador %s' % p)
                             player = Player.objects.get(name=str(p))                        
                         visitorplayers.append(player)
-                    nueva, created = Lineup.objects.ipdate_or_create(lineupid=codigovisitante, players=visitorplayers, team=visitor, timeplayed = tiempo)
+                    nueva, created = Lineup.objects.update_or_create(lineupid=codigovisitante, players=visitorplayers, team=visitor, timeplayed = tiempo)
                     nueva = Lineup.objects.get(lineupid=codigovisitante)
                     for goal in visitorgoaltimes:
                         if goal in range(limitinf, limitsup):
