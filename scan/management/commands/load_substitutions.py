@@ -301,4 +301,5 @@ class Command(BaseCommand):
                 print(e)
                 pass
             
+        
         print('TERMINADAS TODAS LAS SUSTITUCIONES')                     
