@@ -28,14 +28,14 @@ class Command(BaseCommand):
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 print('---------------llamando API-----------------------')
-                s = json.loads(r.text)['match']['substitutions']
+                subs = json.loads(r.text)['match']['substitutions']
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
                 homelineup = json.loads(r.text)['match']['homeTeam']['lineup']
                 awaylineup =  json.loads(r.text)['match']['awayTeam']['lineup']
                 print('EL EKIPO LOCAL ES %s' % l)
                 print('EL VISITANTE ES %s' % v)
-                print('EL NUMERO DE CAMBIOS ES %s' % len(s))
+                print('EL NUMERO DE CAMBIOS ES %s' % len(subs))
                 local = Team.objects.get(name=l)
                 visitor = Team.objects.get(name=v)
                 codigolocal = ''
@@ -59,9 +59,9 @@ class Command(BaseCommand):
                     codigolocal+=str(h['id'])
                     listalocal.append(str(h['id']))
                 
-                for v in awaylineup:
-                    codigovisitante+=str(v['id'])
-                    listavisitante.append(str(v['id']))
+                for w in awaylineup:
+                    codigovisitante+=str(w['id'])
+                    listavisitante.append(str(w['id']))
                 
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
@@ -102,9 +102,8 @@ class Command(BaseCommand):
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)    
                 
                                                 
-                for i in s:
+                for i in subs:
                     team = i['team']['name']
-                    print(team,l,v)
                     if team == l:
                         ls.append(i)
                         print('añadido %s' % l)
@@ -128,30 +127,32 @@ class Command(BaseCommand):
            
             try:    
                 goals = json.loads(r.text)['match']['goals']
-                print('los goles son %s' % goles) 
+                if len(goals) > 0:
+                    print('los goles son %s' % goles) 
                 
-                for i in goals:
-                    team = i['team']['name']  
-                    print(team)
-                    if team == l:
-                        lg.append(i)
-                    if team == v:
-                        vg.append(i)
-                print(lg)
-                print(vg)
-                if len(lg) > 0:
-                    for i in lg:
-                        time = i['minute']
-                        tlg.append(time)
-                if len(vg) > 0:
-                    for i in vg:
-                        time = i['minute']
-                        tvg.append(time)        
-            except Exception as e:
-                print(e)
-                pass
+                    for i in goals:
+                        team = i['team']['name']  
+                        print(team)
+                        if team == l:
+                            lg.append(i)
+                        if team == v:
+                            vg.append(i)
+                    print(lg)
+                    print(vg)
+                    if len(lg) > 0:
+                        for i in lg:
+                            time = i['minute']
+                            tlg.append(time)
+                    if len(vg) > 0:
+                        for i in vg:
+                            time = i['minute']
+                            tvg.append(time)  
+                print('los goles locales son en %s y los visitantes en %s' % (tlg,tvg))    
+        
+                except Exception as e:
+                    print(e)
+                    pass
             
-            print('los goles locales son en %s y los visitantes en %s' % (tlg,tvg))    
             
             try:
                 tl.append(93)
