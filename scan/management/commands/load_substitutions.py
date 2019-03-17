@@ -36,7 +36,8 @@ class Command(BaseCommand):
                 print('EL EKIPO LOCAL ES %s' % l)
                 print('EL VISITANTE ES %s' % v)
                 print('EL NUMERO DE CAMBIOS ES %s' % len(s))
-                
+                local = Team.objects.get(name=l)
+                visitor = Team.objects.get(name=v)
                 codigolocal = ''
                 codigovisitante = ''
                 localplayers = []
