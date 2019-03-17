@@ -68,7 +68,7 @@ class Command(BaseCommand):
                         try:
                             player = Player.objects.get(name=str(p['id']))
                         except:
-                            player = Player.objects.create(name = str(p['id'), team=l)
+                            player = Player.objects.create(name = str(p['id']), team=l)
                             print('Creado el jugador %s' % i)
                         players.append(player) 
                     local_lineup.players = players
@@ -84,7 +84,7 @@ class Command(BaseCommand):
                         try:
                             player = Player.objects.get(name=str(p['id']))
                         except:
-                            player = Player.objects.create(name = str(p['id'), team=v)
+                            player = Player.objects.create(name = str(p['id']), team=v)
                             print('Creado el jugador %s' % i)
                         players.append(player)  
                      visitor_lineup.players = players
