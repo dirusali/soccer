@@ -96,13 +96,15 @@ class Command(BaseCommand):
                     
                 print('los cambios locales son en %s y los visitantes en %s' % (tlg, tvg))    
  
+                tl.append(93)
+                tv.append(93)
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
                 visitortimes = [y - x for x,y in zip(tv,tv[1:])]                  
-                local_lineup.timeplayed  = local_lineup.timeplayed + localtimes[0]
-                print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % localtimes[0])
+                local_lineup.timeplayed  = local_lineup.timeplayed + tl[0]
+                print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % tl[0])
                 local_lineup.save()
-                visitor_lineup.timeplayed = visitor_lineup.timeplated + visitortimes[0]
-                print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % visitortimes[0])
+                visitor_lineup.timeplayed = visitor_lineup.timeplated + tv[0]
+                print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % tv[0])
                 visitor_lineup.save()
                 
                 print('AHORA VAMOS A AÑADIR LOS GOLES')
@@ -111,7 +113,7 @@ class Command(BaseCommand):
                 
                 count = 0
                 for goal in lgt:
-                    if goal < localtimes[0]:
+                    if goal < tl[0]:
                         count+=1
                         local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
                         localgoaltimes = localgoaltimes[1:]
@@ -128,7 +130,7 @@ class Command(BaseCommand):
                 
                 count = 0
                 for goal in visitortimes:
-                    if goal < localtimes[0]:
+                    if goal < tv[0]:
                         count+=1
                         visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
                         local_lineup.goalscounter = local_lineup.goalscounter + 1
@@ -146,9 +148,10 @@ class Command(BaseCommand):
                 count= 0
                 for i in ls:
                     count+=1
-                    limitsup = localtimes[count+1]
-                    limitinf = localtimes[count]
+                    limitsup = tl[count+1]
+                    limitinf = tl[count]
                     tiempo = limitsup - limitinf
+                    print('CREANDO LA ALINEACION QUE JUGÓ ENTRE MIN %s Y EL MIN  %s' % (limitinf,limitsup)) 
                     sale = str(i['playerOut']['id'])
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
@@ -163,7 +166,7 @@ class Command(BaseCommand):
                             print('Creado el jugador %s' % p)
                             player = Player.objects.get(name=str(p))                        
                         localplayers.append(player)
-                    Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=l, timeplayed = localtimes[count])
+                    nueva, created = Lineup.objects.update_or_create(lineupid = codigolocal, players=codigolocal, team=l, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigolocal)
                     for goal in localgoaltimes:
                         if goal in range(limitinf, limitsup):
@@ -181,9 +184,10 @@ class Command(BaseCommand):
                 count = 0
                 for i in vs:
                     count+=1
-                    limitsup = visitortimes[count+1]
-                    limitinf = visitortimes[count]
+                    limitsup = tv[count+1]
+                    limitinf = tv[count]
                     tiempo = limitsup - limitinf
+                    print('CREANDO LA ALINEACION QUE JUGÓ ENTRE MIN %s Y EL MIN  %s' % (limitinf,limitsup)) 
                     sale = str(i['playerOut']['id'])
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
@@ -198,7 +202,7 @@ class Command(BaseCommand):
                             print('Creado el jugador %s' % p)
                             player = Player.objects.get(name=str(p))                        
                         visitorplayers.append(player)
-                    Lineup.objects.create(lineupid = codigolocal, players=codigolocal, team=v, timeplayed = tiempo)
+                    nueva, created = Lineup.objects.ipdate_or_create(lineupid=codigovisitante, players=codigovisitante, team=v, timeplayed = tiempo)
                     nueva = Lineup.objects.get(lineupid=codigovisitante)
                     for goal in visitorgoaltimes:
                         if goal in range(limitinf, limitsup):
