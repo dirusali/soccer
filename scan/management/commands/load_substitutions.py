@@ -75,9 +75,13 @@ class Command(BaseCommand):
                 for i in vs:
                     time = i['minute']
                     tv.append(time)
-                
-                print('los cambios locales son en %s y los visitantes en %s' % (tl,tv))    
-                
+            except Exception as e:
+                print(e)
+                pass
+            
+            print('los cambios locales son en %s y los visitantes en %s' % (tl,tv))    
+           
+            try:    
                 goals = json.loads(r.text)['match']['goals']
                 
                 for i in goals:
@@ -95,7 +99,7 @@ class Command(BaseCommand):
                     tvg.append(time)        
                     
                 print('los cambios locales son en %s y los visitantes en %s' % (tlg, tvg))    
- 
+                
                 tl.append(93)
                 tv.append(93)
                 localtimes = [y - x for x,y in zip(tl,tl[1:])]
@@ -126,8 +130,10 @@ class Command(BaseCommand):
                      else:
                         print('GOLES DE OTRA ALINEACION')
              
-                #visitorgoaltimes = [y - x for x,y in zip(tvg,tvg[1:])]
-                
+            except Exception as e:
+                print(e)
+                pass#visitorgoaltimes = [y - x for x,y in zip(tvg,tvg[1:])]
+            try:    
                 count = 0
                 for goal in visitortimes:
                     if goal < tv[0]:
@@ -142,9 +148,12 @@ class Command(BaseCommand):
                         print('QUITO GOL')
                      else:
                         print('GOLES DE OTRA ALINEACION')
+            except Exception as e:
+                print(e)
+                pass
+            print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO LOCAL')
                 
-                print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO LOCAL')
-                
+            try:
                 count= 0
                 for i in ls:
                     count+=1
@@ -177,10 +186,13 @@ class Command(BaseCommand):
                             nueva.goalscounter = nueva.goalscounter + 1
                             print('GOL AÑADIDO EN CONTRA')        
                     nueva.save()            
-                    print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
+                print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
+            except Exception as e:
+                print(e)
+                pass
+            print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO VISINTATE')
 
-                print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO VISINTATE')
-
+            try:
                 count = 0
                 for i in vs:
                     count+=1
@@ -213,6 +225,9 @@ class Command(BaseCommand):
                             nueva.goalscounter = nueva.goalscounter + 1
                             print('GOL AÑADIDO EN CONTRA')        
                     nueva.save()
-                    print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
-                             
-                             
+                print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
+            except Exception as e:
+                print(e)
+                pass
+            
+        print('TERMINADAS TODAS LAS SUSTITUCIONES')                     
