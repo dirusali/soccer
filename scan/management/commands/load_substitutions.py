@@ -66,27 +66,31 @@ class Command(BaseCommand):
                     local_lineup = Lineup.objects.create(lineupid=codigolocal, team= l)
                     for p in homelineup:
                         try:
-                            player = Player.objects.get(name=str(p['id]))
+                            player = Player.objects.get(name=str(p['id']))
                         except:
                             player = Player.objects.create(name = str(p['id'), team=l)
                             print('Creado el jugador %s' % i)
                         players.append(player) 
-                                                                        
+                    local_lineup.players = players
+                    local_lineup.save()                                                     
+                print('EL NOMBRE DE LA ALINEACION LOCAL ES %s' % local_lineup.lineupid)    
+                                                        
                 try:
                     visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                 except:
                     players = []
-                    vistor_lineup = Lineup.objects.create(lineupid=codigolocal, team= l)
+                    vistor_lineup = Lineup.objects.create(lineupid=codigolocal, team= v)
                     for p in visitorlineup:
                         try:
-                            player = Player.objects.get(name=str(p['id]))
+                            player = Player.objects.get(name=str(p['id']))
                         except:
-                            player = Player.objects.create(name = str(p['id'), team=l)
+                            player = Player.objects.create(name = str(p['id'), team=v)
                             print('Creado el jugador %s' % i)
                         players.append(player)  
                      visitor_lineup.players = players
                      visitor_lineup.save()                                                                                                           
-                print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % codigovisitante)    
+               
+                print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)    
                 
                                                 
                 for i in s:
