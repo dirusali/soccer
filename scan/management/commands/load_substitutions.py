@@ -146,7 +146,7 @@ class Command(BaseCommand):
                 print(e)
                 pass
             
-            print('los goles locales son en %s y los visitantes en %s' % (tl,tv))    
+            print('los goles locales son en %s y los visitantes en %s' % (tlg,tvg))    
             
             try:
                 tl.append(93)
@@ -164,11 +164,10 @@ class Command(BaseCommand):
                 
                 print('AHORA VAMOS A AÑADIR LOS GOLES')
                 
-                #localgoaltimes = [y - x for x,y in zip(tlg,tlg[1:])]
                 
                 count = 0
-                if len(lgt) > 0:
-                    for goal in lgt:
+                if len(tlg) > 0:
+                    for goal in tlg:
                         if goal < tl[0]:
                             count+=1
                             local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
@@ -187,8 +186,8 @@ class Command(BaseCommand):
             
             try:    
                 count = 0
-                if len(vgt) > 0:
-                    for goal in vgt:
+                if len(tgv) > 0:
+                    for goal in tgv:
                         if goal < tv[0]:
                             count+=1
                             visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
