@@ -101,9 +101,9 @@ class Command(BaseCommand):
                 for i in s:
                     team = i['team']['name']    
                     if team == l:
-                        ls.append(ls)
+                        ls.append(i)
                     if team == v:
-                        vs.append(vs)
+                        vs.append(i)
          
                 for i in ls:
                     time = i['minute']
@@ -123,9 +123,9 @@ class Command(BaseCommand):
                 for i in goals:
                     team = i['team']['name']    
                     if team == l:
-                        lg.append(ls)
+                        lg.append(i)
                     if team == v:
-                        vg.append(vs)
+                        vg.append(i)
                         
                 for i in lg:
                     time = i['minute']
