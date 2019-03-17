@@ -37,8 +37,8 @@ class Command(BaseCommand):
                 print('EL VISITANTE ES %s' % v)
                 print('EL NUMERO DE CAMBIOS ES %s' % len(s))
                 
-                codigolocal = []
-                codigovisitante = []
+                codigolocal = ''
+                codigovisitante = ''
                 localplayers = []
                 visitorplayers = []            
                 ls = []
@@ -51,10 +51,10 @@ class Command(BaseCommand):
                 lvg = []
               
                 for h in homelineup:
-                    codigolocal.append(str(h['id']))
+                    codigolocal+=str(h['id']))
                 
                 for v in awaylineup:
-                    codigovisitante.append(str(v['id']))
+                    codigovisitante+=str(v['id']))
                 
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
