@@ -23,11 +23,11 @@ class Command(BaseCommand):
                 pass    
         for i in partidos:
             try:
+                sleep(2)
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
                 print('---------------llamando API-----------------------')
-                
                 s = json.loads(r.text)['match']['substitutions']
                 l = json.loads(r.text)['match']['homeTeam']['name']
                 v = json.loads(r.text)['match']['awayTeam']['name']
@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 awaylineup =  json.loads(r.text)['match']['awayTeam']['lineup']
                 print('EL EKIPO LOCAL ES %s' % l)
                 print('EL VISITANTE ES %s' % v)
-                print('LOS CAMBIOS SON %s' % s)
+                print('EL NUMERO DE CAMBIOS ES %s' % len(s))
                 
                 codigolocal = []
                 codigovisitante = []
@@ -52,16 +52,16 @@ class Command(BaseCommand):
               
                 for h in homelineup:
                     codigolocal.append(str(h['id']))
-    
+                
                 for v in awaylineup:
                     codigovisitante.append(str(v['id']))
-    
+                
+                print('EL CODIGO LOCAL ES %s' % codigolocal)
+                print('EL CODIGO VISITANTE ES %s' % codigovisitante)
+
                 local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
-                
-                print('LA LINEUP LOCAL ES %s' % codigolocal)
-                print('LA LINEUP VISITANE ES %s' % codigovitante)
-                
+                                
                 for i in s:
                     team = i['team']['name']    
                     if team == l:
