@@ -147,11 +147,12 @@ class Command(BaseCommand):
                         print(count)
                         print('GOL PRIMERA ALINEACION')
                         print('QUITO GOL')
-                     else:
+                    else:
                         print('GOLES DE OTRA ALINEACION')
             except Exception as e:
                 print(e)
                 pass
+            
             print('AHORA ACTUALIZAMOS GOLES Y CAMBIOS EN EL EQUIPO LOCAL')
                 
             try:
