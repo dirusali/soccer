@@ -87,8 +87,8 @@ class Command(BaseCommand):
                             player = Player.objects.create(name = str(p['id']), team=v)
                             print('Creado el jugador %s' % i)
                         players.append(player)  
-                     visitor_lineup.players = players
-                     visitor_lineup.save()                                                                                                           
+                    visitor_lineup.players = players
+                    visitor_lineup.save()                                                                                                           
                
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)    
                 
