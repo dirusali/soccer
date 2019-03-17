@@ -26,9 +26,9 @@ class Lineup(models.Model):
     name = models.CharField(max_length=500, blank=True)
     team = models.ForeignKey(Team, null=True, blank=True)
     players = models.ManyToManyField(Player, blank=True, related_name='lineup')
-    timeplayed = models.IntegerField(null=True,blank=True)
-    goalsfavor = models.IntegerField(null=True,blank=True)
-    goalscounter = models.IntegerField(null=True,blank=True)
+    timeplayed = models.IntegerField(null=True,blank=True,default=0)
+    goalsfavor = models.IntegerField(null=True,blank=True,default= 0)
+    goalscounter = models.IntegerField(null=True,blank=True,default=0)
       
 class Match(models.Model):
     local = models.ForeignKey(Team, null=True, blank=True, related_name='localteam')
