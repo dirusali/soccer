@@ -99,9 +99,8 @@ class Command(BaseCommand):
                     visitor_lineup.players = players
                     visitor_lineup.save()                                                                                                           
                
-                print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)    
-                
-                                                
+                print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)
+                                                  
                 for i in subs:
                     team = i['team']['name']
                     if team == l:
@@ -157,6 +156,8 @@ class Command(BaseCommand):
             try:
                 tl.append(93)
                 tv.append(93)
+                print(tl)
+                print(tv)
                 if len(tl) > 1:
                     localtimes = [y - x for x,y in zip(tl,tl[1:])]
                 if len(tv) > 1:
