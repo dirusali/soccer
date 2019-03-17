@@ -59,9 +59,36 @@ class Command(BaseCommand):
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
 
-                local_lineup = Lineup.objects.get(lineupid=codigolocal)
-                visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
-                                
+                try:
+                    local_lineup = Lineup.objects.get(lineupid=codigolocal)
+                except:
+                    players = []
+                    local_lineup = Lineup.objects.create(lineupid=codigolocal, team= l)
+                    for p in homelineup:
+                        try:
+                            player = Player.objects.get(name=str(p['id]))
+                        except:
+                            player = Player.objects.create(name = str(p['id'), team=l)
+                            print('Creado el jugador %s' % i)
+                        players.append(player) 
+                                                                        
+                try:
+                    visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
+                except:
+                    players = []
+                    vistor_lineup = Lineup.objects.create(lineupid=codigolocal, team= l)
+                    for p in visitorlineup:
+                        try:
+                            player = Player.objects.get(name=str(p['id]))
+                        except:
+                            player = Player.objects.create(name = str(p['id'), team=l)
+                            print('Creado el jugador %s' % i)
+                        players.append(player)  
+                     visitor_lineup.players = players
+                     visitor_lineup.save()                                                                                                           
+                print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % codigovisitante)    
+                
+                                                
                 for i in s:
                     team = i['team']['name']    
                     if team == l:
