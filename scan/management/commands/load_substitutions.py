@@ -127,8 +127,8 @@ class Command(BaseCommand):
                         local_lineup.save()
                         visitor_lineup.save()
                         prinnt('QUITO GOL')
-                     else:
-                         print('GOLES DE OTRA ALINEACION')
+                    else:
+                        print('GOLES DE OTRA ALINEACION')
              
             except Exception as e:
                 print(e)
