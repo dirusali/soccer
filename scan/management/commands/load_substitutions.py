@@ -106,9 +106,11 @@ class Command(BaseCommand):
                     team = i['team']['name']    
                     if team == l:
                         ls.append(i)
+                    print(ls)    
                     if team == v:
                         vs.append(i)
-         
+                    print(vs)
+                    
                 for i in ls:
                     time = i['minute']
                     tl.append(time)
@@ -120,7 +122,7 @@ class Command(BaseCommand):
                 pass
             
             
-            print('los cambios locales son en %s y los visitantes en %s' % (tl,tv))    
+            print('los cambios locales son en %s y los visitantes en %s' % (tl, tv))    
            
             try:    
                 goals = json.loads(r.text)['match']['goals']
@@ -132,12 +134,14 @@ class Command(BaseCommand):
                     if team == v:
                         vg.append(i)
                         
-                for i in lg:
-                    time = i['minute']
-                    tlg.append(time)
-                for i in vg:
-                    time = i['minute']
-                    tvg.append(time)        
+                if len(lg) > 0:
+                    for i in lg:
+                        time = i['minute']
+                        tlg.append(time)
+                if len(vg) > 0:
+                    for i in vg:
+                        time = i['minute']
+                        tvg.append(time)        
             except Exception as e:
                 print(e)
                 pass
@@ -147,8 +151,10 @@ class Command(BaseCommand):
             try:
                 tl.append(93)
                 tv.append(93)
-                localtimes = [y - x for x,y in zip(tl,tl[1:])]
-                visitortimes = [y - x for x,y in zip(tv,tv[1:])]                  
+                if len(tl) > 1:
+                    localtimes = [y - x for x,y in zip(tl,tl[1:])]
+                if len(tv) > 1:
+                    visitortimes = [y - x for x,y in zip(tv,tv[1:])]                  
                 local_lineup.timeplayed  = local_lineup.timeplayed + tl[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % tl[0])
                 local_lineup.save()
@@ -161,39 +167,40 @@ class Command(BaseCommand):
                 #localgoaltimes = [y - x for x,y in zip(tlg,tlg[1:])]
                 
                 count = 0
-                for goal in lgt:
-                    if goal < tl[0]:
-                        count+=1
-                        local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
-                        localgoaltimes = localgoaltimes[1:]
-                        visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
-                        print(count)
-                        print('GOL PRIMERA ALINEACION')
-                        local_lineup.save()
-                        visitor_lineup.save()
-                        prinnt('QUITO GOL')
-                    else:
-                        print('GOLES DE OTRA ALINEACION')
+                if len(lgt) > 0:
+                    for goal in lgt:
+                        if goal < tl[0]:
+                            count+=1
+                            local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
+                            localgoaltimes = localgoaltimes[1:]
+                            visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
+                            print(count)
+                            print('GOL PRIMERA ALINEACION')
+                            local_lineup.save()
+                            visitor_lineup.save()
+                            print('QUITO GOL')
+                        else:
+                            print('GOLES DE OTRA ALINEACION')
              
             except Exception as e:
                 print(e)
-                pass#visitorgoaltimes = [y - x for x,y in zip(tvg,tvg[1:])]
             
             try:    
                 count = 0
-                for goal in visitortimes:
-                    if goal < tv[0]:
-                        count+=1
-                        visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
-                        local_lineup.goalscounter = local_lineup.goalscounter + 1
-                        visitorgoaltimes = localgoaltimes[1:]
-                        local_lineup.save()
-                        visitor_lineup.save()
-                        print(count)
-                        print('GOL PRIMERA ALINEACION')
-                        print('QUITO GOL')
-                    else:
-                        print('GOLES DE OTRA ALINEACION')
+                if len(vgt) > 0:
+                    for goal in vgt:
+                        if goal < tv[0]:
+                            count+=1
+                            visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
+                            local_lineup.goalscounter = local_lineup.goalscounter + 1
+                            visitorgoaltimes = localgoaltimes[1:]
+                            local_lineup.save()
+                            visitor_lineup.save()
+                            print(count)
+                            print('GOL PRIMERA ALINEACION')
+                            print('QUITO GOL')
+                        else:
+                            print('GOLES DE OTRA ALINEACION')
             except Exception as e:
                 print(e)
                 pass
