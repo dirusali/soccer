@@ -103,14 +103,14 @@ class Command(BaseCommand):
                 
                                                 
                 for i in s:
-                    team = i['team']['name']    
+                    team = i['team']['name']
+                    print(team)
                     if team == l:
                         ls.append(i)
-                    print(ls)    
                     if team == v:
                         vs.append(i)
-                    print(vs)
-                    
+                print(ls)
+                print(vs)
                 for i in ls:
                     time = i['minute']
                     tl.append(time)
@@ -128,12 +128,14 @@ class Command(BaseCommand):
                 goals = json.loads(r.text)['match']['goals']
                 
                 for i in goals:
-                    team = i['team']['name']    
+                    team = i['team']['name']  
+                    print(team)
                     if team == l:
                         lg.append(i)
                     if team == v:
                         vg.append(i)
-                        
+                print(lg)
+                print(vg)
                 if len(lg) > 0:
                     for i in lg:
                         time = i['minute']
