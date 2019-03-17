@@ -64,7 +64,8 @@ class Command(BaseCommand):
                     local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 except:
                     players = []
-                    local_lineup = Lineup.objects.create(lineupid=codigolocal, team= local)
+                    Lineup.objects.create(lineupid=codigolocal, team= local)
+                    local_lineup = Lineup.objects.create(lineupid=codigolocal)
                     for p in homelineup:
                         try:
                             player = Player.objects.get(name=str(p['id']))
@@ -80,7 +81,8 @@ class Command(BaseCommand):
                     visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                 except:
                     players = []
-                    vistor_lineup = Lineup.objects.create(lineupid=codigolocal, team= visitor)
+                    Lineup.objects.create(lineupid=codigovisitante, team= visitor)
+                    visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                     for p in visitorlineup:
                         try:
                             player = Player.objects.get(name=str(p['id']))
