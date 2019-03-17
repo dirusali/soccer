@@ -149,9 +149,9 @@ class Command(BaseCommand):
                             tvg.append(time)  
                 print('los goles locales son en %s y los visitantes en %s' % (tlg,tvg))    
         
-                except Exception as e:
-                    print(e)
-                    pass
+            except Exception as e:
+                print(e)
+                pass
             
             
             try:
