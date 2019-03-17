@@ -53,7 +53,7 @@ class Command(BaseCommand):
                 localtimes = []
                 visitortimes = []
                 listalocal = []
-                listavisitante
+                listavisitante = []
               
                 for h in homelineup:
                     codigolocal+=str(h['id'])
