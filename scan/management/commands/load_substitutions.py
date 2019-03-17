@@ -51,10 +51,10 @@ class Command(BaseCommand):
                 lvg = []
               
                 for h in homelineup:
-                    codigolocal+=str(h['id']))
+                    codigolocal+=str(h['id'])
                 
                 for v in awaylineup:
-                    codigovisitante+=str(v['id']))
+                    codigovisitante+=str(v['id'])
                 
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
