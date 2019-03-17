@@ -52,12 +52,16 @@ class Command(BaseCommand):
                 tvg = []
                 localtimes = []
                 visitortimes = []
+                listalocal = []
+                listavisitante
               
                 for h in homelineup:
                     codigolocal+=str(h['id'])
+                    listalocal.append(str(h['id']))
                 
                 for v in awaylineup:
                     codigovisitante+=str(v['id'])
+                    listavisitante.append(str(v['id']))
                 
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
@@ -134,7 +138,7 @@ class Command(BaseCommand):
                     time = i['minute']
                     tvg.append(time)        
                     
-                print('los cambios locales son en %s y los visitantes en %s' % (tlg, tvg))    
+                print('los cambios visitantes son en %s y los visitantes en %s' % (tlg, tvg))    
                 
                 tl.append(93)
                 tv.append(93)
@@ -143,7 +147,7 @@ class Command(BaseCommand):
                 local_lineup.timeplayed  = local_lineup.timeplayed + tl[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION LOCAL %s' % tl[0])
                 local_lineup.save()
-                visitor_lineup.timeplayed = visitor_lineup.timeplated + tv[0]
+                visitor_lineup.timeplayed = visitor_lineup.timeplayed + tv[0]
                 print('AÑADIDO TIEMPO1 DE ALINEACION VISITANTE %s' % tv[0])
                 visitor_lineup.save()
                 
@@ -203,17 +207,23 @@ class Command(BaseCommand):
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
                     print('ENTRA EL JUGADOR %s' % entra)
-                    codigolocal = codigolocal.remove(sale)
-                    codigolocal = codigolocal.append(entra)
-                    for p in codigolocal:
-                        try:
-                            player = Player.objects.get(name=str(p))
-                        except:
-                            Player.objects.create(name = str(p), team=l)
-                            print('Creado el jugador %s' % p)
-                            player = Player.objects.get(name=str(p))                        
-                        localplayers.append(player)
-                    nueva, created = Lineup.objects.update_or_create(lineupid = codigolocal, players=localplayers, team=local, timeplayed = localtimes[count])
+                    codigolocal = codigolocal.replace(sale, '')
+                    codigolocal = codigolocal + entra
+                    try:
+                        nueva = Lineup.objects.get(lineupid=codigolocal)
+                    except:
+                        listalocal = listalocal.remove(sale)
+                        listalocal = listalocal.append(entra)
+                        players = []
+                        for p in listalocal:
+                            try:
+                                player = Player.objects.get(name=p)
+                            except:
+                                Player.objects.create(name = p, team=local)
+                                print('Creado el jugador %s' % p)
+                                player = Player.objects.get(name=p)                        
+                            players.append(player)
+                    Lineup.objects.create(lineupid = codigolocal, players=players, team=local, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigolocal)
                     for goal in localgoaltimes:
                         if goal in range(limitinf, limitsup):
@@ -242,17 +252,23 @@ class Command(BaseCommand):
                     print('SALE EL JUGADOR %s' % sale)
                     entra = str(i['playerIn']['id'])
                     print('ENTRA EL JUGADOR %s' % entra)
-                    codigovisitante.remove(sale)
-                    codigovisitante.append(entra)
-                    for p in codigovisitante:
-                        try:
-                            player = Player.objects.get(name=str(p))
-                        except:
-                            Player.objects.create(name = str(p), team=v)
-                            print('Creado el jugador %s' % p)
-                            player = Player.objects.get(name=str(p))                        
-                        visitorplayers.append(player)
-                    nueva, created = Lineup.objects.update_or_create(lineupid=codigovisitante, players=visitorplayers, team=visitor, timeplayed = tiempo)
+                    codigovisitante = codigovisitante.replace(sale, '')
+                    codigovisitante = codigovisitante + entra
+                    try:
+                        nueva = Lineup.objects.get(lineupid=codigovisitante)
+                    except:
+                        listavisitante = listavisitante.remove(sale)
+                        listavisitante = listavisitante.append(entra)
+                        players = []
+                        for p in listavisitante:
+                            try:
+                                player = Player.objects.get(name=p)
+                            except:
+                                Player.objects.create(name = p, team=visitor)
+                                print('Creado el jugador %s' % p)
+                                player = Player.objects.get(name=p)                        
+                            players.append(player)
+                    Lineup.objects.create(lineupid = codigovisitante, players=players, team=visitor, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigovisitante)
                     for goal in visitorgoaltimes:
                         if goal in range(limitinf, limitsup):
