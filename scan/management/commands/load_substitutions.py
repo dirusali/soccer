@@ -128,7 +128,7 @@ class Command(BaseCommand):
             try:    
                 goals = json.loads(r.text)['match']['goals']
                 if len(goals) > 0:
-                    print('los goles son %s' % goles) 
+                    print('los goles son %s' % goals) 
                 
                     for i in goals:
                         team = i['team']['name']  
