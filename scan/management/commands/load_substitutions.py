@@ -87,7 +87,7 @@ class Command(BaseCommand):
                     visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                 except:
                     players = []
-                    Lineup.objects.create(lineupid=codigovisitante, team= visitor, timeplayed=0, goalsfavor=0, goalscounter=0))
+                    Lineup.objects.create(lineupid=codigovisitante, team= visitor, timeplayed=0, goalsfavor=0, goalscounter=0)
                     visitor_lineup = Lineup.objects.get(lineupid=codigovisitante)
                     for p in awaylineup:
                         try:
