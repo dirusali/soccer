@@ -23,7 +23,7 @@ class Command(BaseCommand):
                 pass    
         for i in partidos:
             try:
-                sleep(2)
+                sleep(5)
                 url = 'http://api.football-data.org/v2/matches/' + str(i)
                 print('BUSCANDO EL PARTIDO CON URL %s' % url)
                 r = requests.get(url, headers={'X-Auth-Token':'dfec1fbedad7421abdad5eda2372b4c2'})
