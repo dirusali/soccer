@@ -102,7 +102,8 @@ class Command(BaseCommand):
                     visitor_lineup.save()                                                                                                           
                
                 print('EL NOMBRE DE LA ALINEACION VISITANTE ES %s' % visitor_lineup.lineupid)
-                print('el tiempo default visitor es %s' % visitor_lineup.timeplayed)                                  
+                print('el tiempo default visitor es %s' % visitor_lineup.timeplayed)     
+                
                 for i in subs:
                     team = i['team']['name']
                     if team == l:
@@ -111,11 +112,11 @@ class Command(BaseCommand):
                     if team == v:
                         vs.append(i)
                         print('añadido %s' % v)
-                print(ls)
-                print(vs)
+                        
                 for i in ls:
                     time = i['minute']
                     tl.append(time)
+                    
                 for i in vs:
                     time = i['minute']
                     tv.append(time)
@@ -222,8 +223,8 @@ class Command(BaseCommand):
                 count= 0
                 for i in ls:
                     count+=1
-                    limitsup = tl[count+1]
-                    limitinf = tl[count]
+                    limitsup = tl[count]
+                    limitinf = tl[count-1]
                     tiempo = limitsup - limitinf
                     print('CREANDO LA ALINEACION QUE JUGÓ ENTRE MIN %s Y EL MIN  %s' % (limitinf,limitsup)) 
                     sale = str(i['playerOut']['id'])
@@ -240,6 +241,7 @@ class Command(BaseCommand):
                         nueva.players.remove(psale)
                         nueva.players.add(pentra)
                         nueva.save()
+                        print('CREADA ALINEACION)
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listalocal.remove(sale)
@@ -259,11 +261,14 @@ class Command(BaseCommand):
                         nueva = Lineup.objects.get(lineupid=codigolocal)
                         nueva.players = players
                         nueva.save()
+                        print('CREADA ALINEACION')
                     if len(localgoaltimes) > 0:
                         for goal in localgoaltimes:
                             if goal in range(limitinf, limitsup):
                                 nueva.goalsfavor = nueva.goalsfavor + 1
                                 print('GOL AÑADIDO A FAVOR')
+                             else:
+                                  print('GOL PERTENECE A OTRA LINEUP')
                     if len(visitorgoaltimes) > 0:
                         for goal in visitorgoaltimes:
                             if goal in range(limitinf, limitsup):
@@ -280,8 +285,8 @@ class Command(BaseCommand):
                 count = 0
                 for i in vs:
                     count+=1
-                    limitsup = tv[count+1]
-                    limitinf = tv[count]
+                    limitsup = tv[count]
+                    limitinf = tv[count-1]
                     tiempo = limitsup - limitinf
                     print('CREANDO LA ALINEACION QUE JUGÓ ENTRE MIN %s Y EL MIN  %s' % (limitinf,limitsup)) 
                     sale = str(i['playerOut']['id'])
