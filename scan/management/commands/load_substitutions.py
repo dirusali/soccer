@@ -179,7 +179,7 @@ class Command(BaseCommand):
                         if goal < tl[0]:
                             count+=1
                             local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
-                            localgoaltimes = localgoaltimes[1:]
+                            localgoaltimes = tlg[1:]
                             visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
                             print(count)
                             print('GOL PRIMERA ALINEACION')
@@ -200,7 +200,7 @@ class Command(BaseCommand):
                             count+=1
                             visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
                             local_lineup.goalscounter = local_lineup.goalscounter + 1
-                            visitorgoaltimes = localgoaltimes[1:]
+                            visitorgoaltimes = tvg[1:]
                             local_lineup.save()
                             visitor_lineup.save()
                             print(count)
@@ -230,19 +230,23 @@ class Command(BaseCommand):
                     codigolocal = codigolocal + entra
                     try:
                         nueva = Lineup.objects.get(lineupid=codigolocal)
+                        print('ALINEACION ENCONTRADA')
                     except:
+                        print('NO EXISTE ALINEACION, CREANDOLA....')
                         listalocal = listalocal.remove(sale)
                         listalocal = listalocal.append(entra)
                         players = []
                         for p in listalocal:
                             try:
                                 player = Player.objects.get(name=p)
+                                print('AÑADIDO JUGADOR')
                             except:
                                 Player.objects.create(name = p, team=local)
                                 print('Creado el jugador %s' % p)
                                 player = Player.objects.get(name=p)                        
                             players.append(player)
-                    Lineup.objects.create(lineupid = codigolocal, players=players, team=local, timeplayed = localtimes[count])
+                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
+                        Lineup.objects.create(lineupid = codigolocal, players=players, team=local, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigolocal)
                     for goal in localgoaltimes:
                         if goal in range(limitinf, limitsup):
@@ -275,7 +279,9 @@ class Command(BaseCommand):
                     codigovisitante = codigovisitante + entra
                     try:
                         nueva = Lineup.objects.get(lineupid=codigovisitante)
+                        print('ALINEACION ENCONTRADA')
                     except:
+                        print('NO EXISTE ALINEACION, CREANDOLA....')
                         listavisitante = listavisitante.remove(sale)
                         listavisitante = listavisitante.append(entra)
                         players = []
@@ -287,7 +293,8 @@ class Command(BaseCommand):
                                 print('Creado el jugador %s' % p)
                                 player = Player.objects.get(name=p)                        
                             players.append(player)
-                    Lineup.objects.create(lineupid = codigovisitante, players=players, team=visitor, timeplayed = localtimes[count])
+                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
+                        Lineup.objects.create(lineupid = codigovisitante, players=players, team=visitor, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigovisitante)
                     for goal in visitorgoaltimes:
                         if goal in range(limitinf, limitsup):
