@@ -66,8 +66,8 @@ class Command(BaseCommand):
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
                 print('---------------------------------------------------')
-                print('listalocal')
-                print('listavisitante')
+                print(listalocal)
+                print(listavisitante)
                 try:
                     local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 except:
