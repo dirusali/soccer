@@ -239,6 +239,7 @@ class Command(BaseCommand):
                         pentra = Player.objects.get(name=entra)
                         nueva.players.remove(psale)
                         nueva.players.add(pentra)
+                        nueva.save()
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listalocal.remove(sale)
@@ -255,16 +256,19 @@ class Command(BaseCommand):
                             players.append(player)
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
                         Lineup.objects.create(lineupid = codigolocal, team=local, timeplayed = localtimes[count])
-                    nueva = Lineup.objects.get(lineupid=codigolocal)
-                    nueva.players = players
-                    for goal in localgoaltimes:
-                        if goal in range(limitinf, limitsup):
-                            nueva.goalsfavor = nueva.goalsfavor + 1
-                            print('GOL AÑADIDO A FAVOR')
-                    for goal in visitorgoaltimes:
-                        if goal in range(limitinf, limitsup):
-                            nueva.goalscounter = nueva.goalscounter + 1
-                            print('GOL AÑADIDO EN CONTRA')        
+                        nueva = Lineup.objects.get(lineupid=codigolocal)
+                        nueva.players = players
+                        nueva.save()
+                    if len(localgoaltimes) > 0:
+                        for goal in localgoaltimes:
+                            if goal in range(limitinf, limitsup):
+                                nueva.goalsfavor = nueva.goalsfavor + 1
+                                print('GOL AÑADIDO A FAVOR')
+                    if len(visitorgoaltimes) > 0:
+                        for goal in visitorgoaltimes:
+                            if goal in range(limitinf, limitsup):
+                                nueva.goalscounter = nueva.goalscounter + 1
+                                print('GOL AÑADIDO EN CONTRA')        
                     nueva.save()            
                 print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
             except Exception as e:
@@ -293,6 +297,7 @@ class Command(BaseCommand):
                         pentra = Player.objects.get(name=entra)
                         nueva.players.remove(psale)
                         nueva.players.add(pentra)
+                        nueva.save()
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listavisitante.remove(sale)
@@ -308,16 +313,19 @@ class Command(BaseCommand):
                             players.append(player)
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
                         Lineup.objects.create(lineupid = codigovisitante, team=visitor, timeplayed = localtimes[count])
-                    nueva = Lineup.objects.get(lineupid=codigovisitante)
-                    nueva.players = players
-                    for goal in visitorgoaltimes:
-                        if goal in range(limitinf, limitsup):
-                            nueva.goalsfavor = nueva.goalsfavor + 1
-                            print('GOL AÑADIDO A FAVOR')
-                    for goal in localgoaltimes:
-                        if goal in range(limitinf, limitsup):
-                            nueva.goalscounter = nueva.goalscounter + 1
-                            print('GOL AÑADIDO EN CONTRA')        
+                        nueva = Lineup.objects.get(lineupid=codigovisitante)
+                        nueva.players = players
+                        nueva.save()
+                    if len(visitorgoaltimes) > 0:
+                        for goal in visitorgoaltimes:
+                            if goal in range(limitinf, limitsup):
+                                nueva.goalsfavor = nueva.goalsfavor + 1
+                                print('GOL AÑADIDO A FAVOR')
+                    if len(localgoaltimes) > 0:
+                        for goal in localgoaltimes:
+                            if goal in range(limitinf, limitsup):
+                                nueva.goalscounter = nueva.goalscounter + 1
+                                print('GOL AÑADIDO EN CONTRA')        
                     nueva.save()
                 print('CREADA NUEVA LINEUP %s' % nueva.lineupid)
             except Exception as e:
