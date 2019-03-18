@@ -182,7 +182,6 @@ class Command(BaseCommand):
                             local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
                             localgoaltimes = tlg[(count):]
                             visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
-                            print(count)
                             print('GOL PRIMERA ALINEACION')
                             print(localgoaltimes)
                             local_lineup.save()
@@ -206,7 +205,6 @@ class Command(BaseCommand):
                             visitorgoaltimes = tvg[(count):]
                             local_lineup.save()
                             visitor_lineup.save()
-                            print(count)
                             print('GOL PRIMERA ALINEACION')
                             print(visitorgoaltimes)
                             print('QUITO GOL')
@@ -235,6 +233,10 @@ class Command(BaseCommand):
                     try:
                         nueva = Lineup.objects.get(lineupid=codigolocal)
                         print('ALINEACION ENCONTRADA')
+                        psale = Player.objects.get(name=sale)
+                        pentra = Player.objects.get(name=entra)
+                        nueva.players.remove(psale)
+                        nueva.players.add(pentra)
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listalocal.remove(sale)
@@ -285,6 +287,10 @@ class Command(BaseCommand):
                     try:
                         nueva = Lineup.objects.get(lineupid=codigovisitante)
                         print('ALINEACION ENCONTRADA')
+                        psale = Player.objects.get(name=sale)
+                        pentra = Player.objects.get(name=entra)
+                        nueva.players.remove(psale)
+                        nueva.players.add(pentra)
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listavisitante.remove(sale)
