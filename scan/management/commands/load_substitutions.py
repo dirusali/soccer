@@ -241,7 +241,7 @@ class Command(BaseCommand):
                         nueva.players.remove(psale)
                         nueva.players.add(pentra)
                         nueva.save()
-                        print('CREADA ALINEACION)
+                        print('CREADA ALINEACION')
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
                         listalocal.remove(sale)
@@ -267,8 +267,6 @@ class Command(BaseCommand):
                             if goal in range(limitinf, limitsup):
                                 nueva.goalsfavor = nueva.goalsfavor + 1
                                 print('GOL AÑADIDO A FAVOR')
-                             else:
-                                  print('GOL PERTENECE A OTRA LINEUP')
                     if len(visitorgoaltimes) > 0:
                         for goal in visitorgoaltimes:
                             if goal in range(limitinf, limitsup):
