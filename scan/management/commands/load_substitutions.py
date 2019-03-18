@@ -250,12 +250,14 @@ class Command(BaseCommand):
                         for p in listalocal:
                             try:
                                 player = Player.objects.get(name=p)
+                                players.append(player)
                                 print('AÑADIDO JUGADOR')
                             except:
                                 Player.objects.create(name = p, team=local)
                                 print('Creado el jugador %s' % p)
                                 player = Player.objects.get(name=p)                        
-                            players.append(player)
+                                players.append(player)
+                                print('AÑADIDO JUGADOR')
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
                         Lineup.objects.create(lineupid = codigolocal, team=local, timeplayed = localtimes[count])
                         nueva = Lineup.objects.get(lineupid=codigolocal)
@@ -309,11 +311,14 @@ class Command(BaseCommand):
                         for p in listavisitante:
                             try:
                                 player = Player.objects.get(name=p)
+                                players.append(player)
+                                print('AÑADIDO JUGADOR')
                             except:
                                 Player.objects.create(name = p, team=visitor)
                                 print('Creado el jugador %s' % p)
                                 player = Player.objects.get(name=p)                        
-                            players.append(player)
+                                players.append(player)
+                                print('AÑADIDO JUGADOR')
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
                         Lineup.objects.create(lineupid = codigovisitante, team=visitor, timeplayed = localtimes[count])
                         nueva = Lineup.objects.get(lineupid=codigovisitante)
