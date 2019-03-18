@@ -65,9 +65,7 @@ class Command(BaseCommand):
                 
                 print('EL CODIGO LOCAL ES %s' % codigolocal)
                 print('EL CODIGO VISITANTE ES %s' % codigovisitante)
-                print('---------------------------------------------------')
-                print(listalocal)
-                print(listavisitante)
+             
                 try:
                     local_lineup = Lineup.objects.get(lineupid=codigolocal)
                 except:
@@ -235,9 +233,8 @@ class Command(BaseCommand):
                         print('ALINEACION ENCONTRADA')
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
-                        listalocal = listalocal.remove(sale)
-                        listalocal = listalocal.append(entra)
-                        print(listalocal)
+                        listalocal.remove(sale)
+                        listalocal.append(entra)
                         players = []
                         for p in listalocal:
                             try:
@@ -285,8 +282,8 @@ class Command(BaseCommand):
                         print('ALINEACION ENCONTRADA')
                     except:
                         print('NO EXISTE ALINEACION, CREANDOLA....')
-                        listavisitante = listavisitante.remove(sale)
-                        listavisitante = listavisitante.append(entra)
+                        listavisitante.remove(sale)
+                        listavisitante.append(entra)
                         players = []
                         for p in listavisitante:
                             try:
