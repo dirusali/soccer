@@ -311,6 +311,5 @@ class Command(BaseCommand):
             except Exception as e:
                 print(e)
                 pass
-            
-        
+                  
         print('TERMINADAS TODAS LAS SUSTITUCIONES')                     
