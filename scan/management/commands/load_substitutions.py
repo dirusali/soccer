@@ -208,7 +208,7 @@ class Command(BaseCommand):
                             visitor_lineup.save()
                             print(count)
                             print('GOL PRIMERA ALINEACION')
-                             print(visitorgoaltimes)
+                            print(visitorgoaltimes)
                             print('QUITO GOL')
                         else:
                             print('GOLES DE OTRA ALINEACION')
