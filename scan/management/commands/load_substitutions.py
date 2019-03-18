@@ -174,13 +174,14 @@ class Command(BaseCommand):
                 
                 print('AHORA VAMOS A AÑADIR LOS GOLES')
                 print(tlg)
+                localgoaltimes = tlg
                 count = 0
                 if len(tlg) > 0:
                     for goal in tlg:
                         if goal < tl[0]:
                             count+=1
                             local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
-                            localgoaltimes = tlg[(count):]
+                            localgoaltimes = localgoaltimes[1:]
                             visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
                             print('GOL PRIMERA ALINEACION')
                             print(localgoaltimes)
@@ -196,13 +197,14 @@ class Command(BaseCommand):
             try:    
                 count = 0
                 print(tvg)
+                visitorgoaltimes = tvg
                 if len(tvg) > 0:
                     for goal in tvg:
                         if goal < tv[0]:
                             count+=1
                             visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
                             local_lineup.goalscounter = local_lineup.goalscounter + 1
-                            visitorgoaltimes = tvg[(count):]
+                            visitoegoaltimes = visitorgoaltimes[1:]
                             local_lineup.save()
                             visitor_lineup.save()
                             print('GOL PRIMERA ALINEACION')
