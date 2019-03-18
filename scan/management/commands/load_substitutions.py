@@ -258,8 +258,9 @@ class Command(BaseCommand):
                                 player = Player.objects.get(name=p)                        
                                 players.append(player)
                                 print('AÑADIDO JUGADOR')
-                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
-                        Lineup.objects.create(lineupid = codigolocal, team=local, timeplayed = localtimes[count])
+                        print('los players son %s' % players)        
+                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % tiempo)    
+                        Lineup.objects.create(lineupid = codigolocal, team=local, timeplayed = tiempo)
                         nueva = Lineup.objects.get(lineupid=codigolocal)
                         nueva.players = players
                         nueva.save()
@@ -319,8 +320,9 @@ class Command(BaseCommand):
                                 player = Player.objects.get(name=p)                        
                                 players.append(player)
                                 print('AÑADIDO JUGADOR')
-                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
-                        Lineup.objects.create(lineupid = codigovisitante, team=visitor, timeplayed = localtimes[count])
+                        print('los players son %s' % players)        
+                        print('EL TIEMPO PARA ESTA ALINEACION ES %s' % tiempo)    
+                        Lineup.objects.create(lineupid = codigovisitante, team=visitor, timeplayed = tiempo)
                         nueva = Lineup.objects.get(lineupid=codigovisitante)
                         nueva.players = players
                         nueva.save()
