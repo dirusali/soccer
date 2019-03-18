@@ -54,6 +54,8 @@ class Command(BaseCommand):
                 visitortimes = []
                 listalocal = []
                 listavisitante = []
+                localgoaltimes = []
+                visitorgoaltimes = []
               
                 for h in homelineup:
                     codigolocal+=str(h['id'])
@@ -171,18 +173,18 @@ class Command(BaseCommand):
                 visitor_lineup.save()
                 
                 print('AHORA VAMOS A AÑADIR LOS GOLES')
-                
-                
+                print(tlg)
                 count = 0
                 if len(tlg) > 0:
                     for goal in tlg:
                         if goal < tl[0]:
                             count+=1
                             local_lineup.goalsfavor = local_lineup.goalsfavor + 1 
-                            localgoaltimes = tlg[1:]
+                            localgoaltimes = tlg[(count):]
                             visitor_lineup.goalscounter = visitor_lineup.goalscounter + 1
                             print(count)
                             print('GOL PRIMERA ALINEACION')
+                            print(localgoaltimes)
                             local_lineup.save()
                             visitor_lineup.save()
                             print('QUITO GOL')
@@ -194,17 +196,19 @@ class Command(BaseCommand):
             
             try:    
                 count = 0
+                print(tvg)
                 if len(tvg) > 0:
                     for goal in tvg:
                         if goal < tv[0]:
                             count+=1
                             visitor_lineup.goalsfavor = visitor_lineup.goalsfavor + 1 
                             local_lineup.goalscounter = local_lineup.goalscounter + 1
-                            visitorgoaltimes = tvg[1:]
+                            visitorgoaltimes = tvg[(count):]
                             local_lineup.save()
                             visitor_lineup.save()
                             print(count)
                             print('GOL PRIMERA ALINEACION')
+                             print(visitorgoaltimes)
                             print('QUITO GOL')
                         else:
                             print('GOLES DE OTRA ALINEACION')
