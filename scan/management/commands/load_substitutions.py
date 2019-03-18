@@ -246,8 +246,9 @@ class Command(BaseCommand):
                                 player = Player.objects.get(name=p)                        
                             players.append(player)
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
-                        Lineup.objects.create(lineupid = codigolocal, players=players, team=local, timeplayed = localtimes[count])
+                        Lineup.objects.create(lineupid = codigolocal, team=local, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigolocal)
+                    nueva.players = players
                     for goal in localgoaltimes:
                         if goal in range(limitinf, limitsup):
                             nueva.goalsfavor = nueva.goalsfavor + 1
@@ -294,8 +295,9 @@ class Command(BaseCommand):
                                 player = Player.objects.get(name=p)                        
                             players.append(player)
                         print('EL TIEMPO PARA ESTA ALINEACION ES %s' % localtimes[count])    
-                        Lineup.objects.create(lineupid = codigovisitante, players=players, team=visitor, timeplayed = localtimes[count])
+                        Lineup.objects.create(lineupid = codigovisitante, team=visitor, timeplayed = localtimes[count])
                     nueva = Lineup.objects.get(lineupid=codigovisitante)
+                    nueva.players = players
                     for goal in visitorgoaltimes:
                         if goal in range(limitinf, limitsup):
                             nueva.goalsfavor = nueva.goalsfavor + 1
