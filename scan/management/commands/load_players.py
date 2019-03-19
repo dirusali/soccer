@@ -28,11 +28,13 @@ class Command(BaseCommand):
                             print('YA CREADO'
                         except:
                             edad = 2019 - int(p['dateOfBirth'][0:4])
-                            i.player_set.create(name = str(p['id']), position = p['position'], age = edad)
+                            w = p['name']      
+                            i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
                             print('Created player %s' % p['name'])
-                    if p['role'] == 'COACH':
-                        i.coach = p['name']
-                        i.save()
+                            i.save()      
+                    #if p['role'] == 'COACH':
+                    #    i.coach = p['name']
+                    #    i.save()
                     time.sleep(2)    
             except Exception as e:
                 print(e)
