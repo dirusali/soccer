@@ -5,7 +5,7 @@ from scan.models import Competition, Match, Team, Player, Lineup
 import requests
 import json
 
-url = 'http://api.football-data.org/v2/competitions/2014/teams?season=2017'
+url = 'http://api.football-data.org/v2/competitions/2014/teams?season=2016'
 
 
 class Command(BaseCommand):
