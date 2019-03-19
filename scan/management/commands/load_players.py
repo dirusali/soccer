@@ -25,7 +25,7 @@ class Command(BaseCommand):
                         try:
                             nombre = p['id']
                             player = Player.objects.get(name=nombre)
-                            print('YA CREADO'
+                            print('YA CREADO')
                         except:
                             edad = 2019 - int(p['dateOfBirth'][0:4])
                             w = p['name']      
