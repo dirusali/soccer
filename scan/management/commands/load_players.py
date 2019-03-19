@@ -22,9 +22,14 @@ class Command(BaseCommand):
                 squad = json.loads(response.text)['squad']
                 for p in squad:
                     if p['role'] == 'PLAYER':
-                        edad = 2019 - int(p['dateOfBirth'][0:4])
-                        i.player_set.create(name = str(p['id']), position = p['position'], age = edad)
-                        print('Created player %s' % p['name'])
+                        try:
+                            nombre = p['id']
+                            player = Player.objects.get(name=nombre)
+                            print('YA CREADO'
+                        except:
+                            edad = 2019 - int(p['dateOfBirth'][0:4])
+                            i.player_set.create(name = str(p['id']), position = p['position'], age = edad)
+                            print('Created player %s' % p['name'])
                     if p['role'] == 'COACH':
                         i.coach = p['name']
                         i.save()
