@@ -6,7 +6,7 @@ import requests
 import json
 from time import sleep
 
-urlmatches = 'http://api.football-data.org/v2/competitions/2014/matches'
+urlmatches = 'http://api.football-data.org/v2/competitions/2014/matches?season=2017'
 
 
 class Command(BaseCommand):
