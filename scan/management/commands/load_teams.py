@@ -17,7 +17,12 @@ class Command(BaseCommand):
             count+=1
             nombre = i['name']
             id = i['id']
-            Team.objects.create(name= nombre,identificador=id)
-            print('CREATED TEAM %s' % nombre)
+            try:
+                Team.objects.get(name=nombre)
+                print('YA ESTA CREADO')
+                pass
+            except:    
+                Team.objects.create(name= nombre,identificador=id)
+                print('CREATED TEAM %s' % nombre)
     print('process finished')        
         
