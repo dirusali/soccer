@@ -22,6 +22,7 @@ class Player(models.Model):
     age = models.IntegerField(blank=True, null=True)
     timeplayed = models.IntegerField(null=True,blank=True,default=0)
     goaldif = models.FloatField(null=True,blank=True,default=0)
+    total = models.FloatField(null=True,blank=True,default=0)
     
 class Lineup(models.Model):
     lineupid = models.CharField(max_length=500, blank=True)
