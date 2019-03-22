@@ -34,6 +34,7 @@ class Lineup(models.Model):
     goalscounter = models.IntegerField(null=True,blank=True,default=0)
     goaldif = models.FloatField(null=True,blank=True,default=0)
     goalaverage = models.FloatField(null=True,blank=True,default=0)
+    total = models.FloatField(null=True,blank=True,default=0)
       
 class Match(models.Model):
     local = models.ForeignKey(Team, null=True, blank=True, related_name='localteam')
