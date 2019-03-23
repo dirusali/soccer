@@ -6,4 +6,4 @@ from scan.models import Match
 def partidos(request):
     qs = Match.objects.all()
     vista = {'match':qs}
-    return render(request, 'templates/partidos.html', context=vista)
+    return render(request, 'partidos.html', context=vista)
