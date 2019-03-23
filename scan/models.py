@@ -44,7 +44,8 @@ class Match(models.Model):
 class Competition(models.Model):
     name = models.CharField(max_length=500, null =True, blank=True)
 
-    
+class jornada(models.Model)
+    partido = models.CharField(max_length=500, blank=True)
     
     
     
