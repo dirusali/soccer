@@ -1,4 +1,4 @@
-from scan.models import Competition, Match, Team, Player, Lineup
+from scan.models import Competition, Match, Team, Player, Lineup, Jornada
 from django.contrib import admin
 
 
@@ -33,3 +33,8 @@ class LineupAdmin(admin.ModelAdmin):
     raw_id_fields = ['players']
     
 admin.site.register(Lineup, LineupAdmin)
+
+class JornadaAdmin(admin.ModelAdmin):
+    list_display = ['currentmatch', 'split']
+    
+admin.site.register(Jornada, JornadaAdmin)
