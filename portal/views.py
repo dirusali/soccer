@@ -4,5 +4,6 @@ from scan.models import Match
 
 
 def partidos(request):
-    vista = {'variable':'vengo de vistas')
+    qs = Match.object.all()
+    vista = {'match':qs}
     return HttpResponse(request, 'templates/partidos.html', context=vista)
