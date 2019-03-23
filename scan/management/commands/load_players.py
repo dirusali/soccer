@@ -6,7 +6,7 @@ import requests
 import json
 import time
 
-urlteams = 'http://api.football-data.org/v2/competitions/2014/teams?season=2017'
+urlteams = 'http://api.football-data.org/v2/competitions/2014/teams?'
 
 
 class Command(BaseCommand):
@@ -23,18 +23,14 @@ class Command(BaseCommand):
                 for p in squad:
                     if p['role'] == 'PLAYER':
                         try:
-                            nombre = p['id']
-                            player = Player.objects.get(name=nombre)
-                            print('YA CREADO')
-                        except:
                             edad = 2019 - int(p['dateOfBirth'][0:4])
                             w = p['name']      
                             i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
                             print('Created player %s' % p['name'])
                             i.save()      
-                    #if p['role'] == 'COACH':
-                    #    i.coach = p['name']
-                    #    i.save()
+                        except Exception as e:
+                            print(e)
+                            pass
                     time.sleep(2)    
             except Exception as e:
                 print(e)
