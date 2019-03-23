@@ -5,5 +5,5 @@ from scan.models import Match
 
 def partidos(request):
     qs = Match.objects.all()        
-    vista = {"partidos": qs}
+    vista = {"partidos": "qs"}
     return HttpResponse(request, 'partidos.html', context=vista)
