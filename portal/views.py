@@ -4,6 +4,14 @@ from scan.models import Match
 
 
 def partidos(request):
-    qs = Match.objects.all()
+    pasada = 28
+    inicio = 246112
+    actual = 246112 + pasada*10
+    locals = []
+    visitors = []
+    for i in range(actual, actual+10):
+        p = Match.objects.get(id=i)
+        locals.append(p.local)
+        visitors.append(i.visitor)
     vista = {'match':qs}
     return render(request, 'partidos.html', context=vista)
