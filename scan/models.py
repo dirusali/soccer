@@ -44,7 +44,7 @@ class Match(models.Model):
 class Competition(models.Model):
     name = models.CharField(max_length=500, null =True, blank=True)
 
-class jornada(models.Model):
+class Jornada(models.Model):
     currentmatch = models.CharField(max_length=500, null=True, blank=True)
     split = models.FloatField(null=True,blank=True,default=0)
     
