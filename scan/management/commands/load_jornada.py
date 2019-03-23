@@ -17,7 +17,7 @@ class Command(BaseCommand):
             try:
                 p = Match.objects.get(matchid=i)
                 local = p.local.name
-                visitante = p.visitante.name
+                visitante = p.visitor.name
                 match = ('%s - %s' % (local,visitante))
                 Jornada.objects.Create(currentmatch=match)
                 partidos = []
