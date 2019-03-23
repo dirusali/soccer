@@ -4,6 +4,5 @@ from scan.models import Match
 
 
 def partidos(request):
-    qs = Match.objects.all()   
-    qs = qs[0].local
+    qs = 'local'
     return HttpResponse(request, 'partidos.html', qs)
