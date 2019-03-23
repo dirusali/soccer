@@ -1,6 +1,6 @@
-
-
 from django.http import HttpResponse
 
+from templates import partidos.html
+
 def home(request):
-    return HttpResponse("<h1>HelloWorld</h1>")
+    return HttpResponse(partidos.html)
