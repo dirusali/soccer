@@ -4,14 +4,12 @@ from scan.models import Match
 
 
 def partidos(request):
-    pasada = 28
-    inicio = 246112
-    actual = 246112 + pasada*10
+    actual = 246112 + 280
     locals = []
     visitors = []
     qs = Match.objects.all()
     for i in range(actual, actual+10):
-        p = Match.objects.get(id=i)
+        p = Match.objects.get(matchid=i)
         locals.append(p.local)
         visitors.append(i.visitor)
     vista = {'matches':qs}
