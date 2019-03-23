@@ -20,6 +20,6 @@ class Command(BaseCommand):
                 visitante = p.visitor.name
                 match = ('%s - %s' % (local,visitante))
                 Jornada.objects.create(currentmatch=match)
-                print('CREADO PARTIDO %s' % currentmatch)
+                print('CREADO PARTIDO %s' % match)
             except Exception as e:
                 print(e)
