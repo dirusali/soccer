@@ -5,4 +5,4 @@ from scan.models import Match
 
 def partidos(request):
     qs = 'local'
-    return HttpResponse(request, 'partidos.html', qs)
+    return HttpResponse(request, 'templates/partidos.html', qs)
