@@ -9,9 +9,10 @@ def partidos(request):
     actual = 246112 + pasada*10
     locals = []
     visitors = []
+    qs = Match.objects.all()
     for i in range(actual, actual+10):
         p = Match.objects.get(id=i)
         locals.append(p.local)
         visitors.append(i.visitor)
-    vista = {'match':qs}
+    vista = {'matches':qs}
     return render(request, 'partidos.html', context=vista)
