@@ -12,5 +12,5 @@ def partidos(request):
         p = Match.objects.get(matchid=i)
         locales.append(p.local.name)
         visitors.append(p.visitor.name)
-    vista = {'matches':qs}
+    vista = {'matches':locales}
     return render(request, 'partidos.html', context=vista)
