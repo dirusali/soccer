@@ -89,21 +89,21 @@ class Command(BaseCommand):
                 for p in visitorlocales:
                     try:
                         q = Player.objects.filter(words__iexact=p) 
-                         encontrado = q[0]
-                         print('ENCONTRADO %s' % encontrado)
-                         local_lineupid += encontrado.name
+                        encontrado = q[0]
+                        print('ENCONTRADO %s' % encontrado)
+                        local_lineupid += encontrado.name
                     except Exception as e:
-                         palabras = p.split()
-                         print(palabras)
-                         for z in palabras:
-                             print('buscando %s' % p)
-                             q = Player.objects.filter(words__icontains=z)
-                             for x in q:
-                                 print(x)
-                                 if x.team.name == local
-                                     encontrado = (q[0].words)
-                                     local_lineupid += encontrado.name
-                                     print('buscamos %s y encontramos %s' %(i, encontrado))
+                        palabras = p.split()
+                        print(palabras)
+                        for z in palabras:
+                            print('buscando %s' % p)
+                            q = Player.objects.filter(words__icontains=z)
+                            for x in q:
+                                print(x)
+                                if x.team.name == local
+                                    encontrado = (q[0].words)
+                                    local_lineupid += encontrado.name
+                                    print('buscamos %s y encontramos %s' %(i, encontrado))
 
             except Exception as e:
                 print(e)
