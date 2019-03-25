@@ -4,8 +4,6 @@ from django.db import models
 from scan.models import Competition, Match, Team, Player, Lineup, Jornada
 
 from lxml import html
-import simplejson as json
-import requests
 import requests
 import json
 import time
