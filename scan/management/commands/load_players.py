@@ -24,10 +24,17 @@ class Command(BaseCommand):
                     if p['role'] == 'PLAYER':
                         try:
                             edad = 2019 - int(p['dateOfBirth'][0:4])
-                            w = p['name']      
-                            i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
-                            print('Created player %s' % p['name'])
-                            i.save()      
+                        except:
+                            pass
+                        try:
+                            if edad is not None:
+                                w = p['name']      
+                                i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
+                                print('Created player %s' % p['name'])
+                            else:    
+                                w = p['name']      
+                                i.player_set.create(name = str(p['id']), words=w, position = p['position'])
+                                print('Created player %s' % p['name'])
                         except Exception as e:
                             print(e)
                             pass
