@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 pass
             
             try:
-                playerlocales = playes[:11]
+                playerlocales = players[:11]
                 print('LOS JUGADORES LOCALES SON %s' % playerlocales)
                 playersvisitantes=playerlocales[12:]
                 print('LOS JUGADORES VISITANTES SON %s' & playervisitantes)
