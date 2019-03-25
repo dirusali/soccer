@@ -77,7 +77,7 @@ class Command(BaseCommand):
                             print('buscando %s' % p)
                             q = Player.objects.filter(words__icontains=z)
                             for x in q:
-                                print(x)
+                                print(x.name)
                                 if x.team.name == local:
                                     encontrado = (q[0].words)
                                     local_lineupid += encontrado.name
