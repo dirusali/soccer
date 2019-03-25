@@ -73,16 +73,16 @@ class Command(BaseCommand):
                         local_lineupid += encontrado.name
                     except Exception as e:
                         palabras = p.split()
-                       print(palabras)
-                       for z in palabras:
-                           print('buscando %s' % p)
-                           q = Player.objects.filter(words__icontains=z)
-                           for x in q:
-                               print(x)
-                               if x.team.name == local
-                                   encontrado = (q[0].words)
-                                   local_lineupid += encontrado.name
-                                   print('buscamos %s y encontramos %s' %(i, encontrado))
+                        print(palabras)
+                        for z in palabras:
+                            print('buscando %s' % p)
+                            q = Player.objects.filter(words__icontains=z)
+                            for x in q:
+                                print(x)
+                                if x.team.name == local
+                                    encontrado = (q[0].words)
+                                    local_lineupid += encontrado.name
+                                    print('buscamos %s y encontramos %s' %(i, encontrado))
    
                                     
                 visitor_lineupid = '' 
