@@ -110,5 +110,4 @@ class Command(BaseCommand):
                 pass   
 
    
-            Jornada.objects.create(currentmatch=match)
             
