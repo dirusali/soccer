@@ -26,19 +26,13 @@ class Command(BaseCommand):
                             nombre = p['id']
                             player = Player.objects.get(name=nombre)
                             print('YA CREADO')
-                        except:
-                            try:
-                                try:
-                                    edad = 2019 - int(p['dateOfBirth'][0:4])
-                                except:
-                                    pass
-                                w = p['name']      
-                                i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
-                                print('Created player %s' % p['name'])
-                                i.save()
-                            except Exception as e:
-                                print(e)
-                                pass
+                        except Exception as e:
+                            print(e)
+                            edad = 2019 - int(p['dateOfBirth'][0:4])
+                            w = p['name']      
+                            i.player_set.create(name = str(p['id']), words=w, position = p['position'], age = edad)
+                            print('Created player %s' % p['name'])
+                            i.save()
                     time.sleep(2)    
             except Exception as e:
                 print(e)
