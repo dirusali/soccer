@@ -47,14 +47,14 @@ class Command(BaseCommand):
                 for i in a:
                     if i is not None:
                         jugadores.append(i.text)
-               players = []
-               for j in jugadores:
-                   if j is not None:
-                       if j != 'Contacto':
-                           if 'Jornada' not in j:
-                               if 'Cronista' not in j:
-                                   if 'Aviso' not in j:
-                                       players.append(j)  
+                players = []
+                for j in jugadores:
+                    if j is not None:
+                        if j != 'Contacto':
+                            if 'Jornada' not in j:
+                                if 'Cronista' not in j:
+                                    if 'Aviso' not in j:
+                                        players.append(j)  
             except Exception as e:
                 print(e)
                 pass
