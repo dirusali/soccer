@@ -62,7 +62,7 @@ class Command(BaseCommand):
             try:
                 playerlocales = playes[:11]
                 print('LOS JUGADORES LOCALES SON %s' % playerlocales)
-                playersvisitantes=[12:]
+                playersvisitantes=playerlocales[12:]
                 print('LOS JUGADORES VISITANTES SON %s' & playervisitantes)
                 
                 local_lineupid = '' 
