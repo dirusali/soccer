@@ -69,6 +69,7 @@ class Command(BaseCommand):
                         q = Player.objects.filter(words__iexact=p) 
                         encontrado = (q[0])
                         local_lineupid += encontrado.name
+                        print('encontrado %s' % encontrado.name)
                     except Exception as e:
                         palabras = p.split()
                         print(palabras)
@@ -84,12 +85,13 @@ class Command(BaseCommand):
    
                                     
                 visitor_lineupid = '' 
-                for p in visitorlocales:
+                for p in playersvisitantes:
                     try:
                         q = Player.objects.filter(words__iexact=p) 
                         encontrado = q[0]
                         print('ENCONTRADO %s' % encontrado)
                         local_lineupid += encontrado.name
+                        print('encontrado %s' % encontrado.name)
                     except Exception as e:
                         palabras = p.split()
                         print(palabras)
