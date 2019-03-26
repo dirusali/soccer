@@ -25,10 +25,11 @@ class Command(BaseCommand):
                         nombre = p['name']
                         print(nombre)
                         player = Player.objects.get(name=str(p['id']))
-                        player.words = nombre
-                        player.save()
-                        print('Updated player %s' % nombre)
-                    time.sleep(2)    
+                        if len(player.words) <= 1:
+                            player.words = nombre
+                            player.save()
+                            print('Updated player %s' % nombre)
+                        time.sleep(2)    
             except Exception as e:
                 print(e)
                 pass
