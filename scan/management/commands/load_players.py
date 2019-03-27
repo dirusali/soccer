@@ -6,7 +6,7 @@ import requests
 import json
 import time
 
-urlteams = 'http://api.football-data.org/v2/competitions/2014/teams?season=2017' 
+urlteams = 'http://api.football-data.org/v2/competitions/2014/teams' 
 
 
 class Command(BaseCommand):
