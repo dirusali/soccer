@@ -29,7 +29,7 @@ class PlayerAdmin(admin.ModelAdmin):
 admin.site.register(Player, PlayerAdmin)
 
 class LineupAdmin(admin.ModelAdmin):
-    list_display = ['name', 'lineupid', 'timeplayed', 'goalsfavor', 'goalscounter', 'goaldif', 'goalaverage']
+    list_display = ['name', 'lineupid', 'timeplayed', 'goalsfavor', 'goalscounter', 'goaldif', 'goalaverage', 'total']
     raw_id_fields = ['players']
     
 admin.site.register(Lineup, LineupAdmin)
