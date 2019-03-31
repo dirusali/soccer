@@ -79,7 +79,7 @@ class Command(BaseCommand):
                             print('buscando %s' % p)
                             q = Player.objects.filter(words__icontains=z)
                             for x in q:
-                                ekipo = x.team
+                                ekipo = x.team.name
                                 team = Team.objects.get(name=ekipo)
                                 print('el team es %s' % team)
                                 if team.name == local:
@@ -103,7 +103,7 @@ class Command(BaseCommand):
                             print('buscando %s' % p)
                             q = Player.objects.filter(words__icontains=z)
                             for x in q:
-                                ekipo = x.team
+                                ekipo = x.team.name
                                 team = Team.objects.get(name=ekipo)
                                 print('el team es %s' % team)
                                 if team.name == visitante:
