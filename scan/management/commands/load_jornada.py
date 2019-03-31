@@ -81,7 +81,7 @@ class Command(BaseCommand):
                             for x in q:
                                 ekipo = x.team.name
                                 team = Team.objects.get(name=ekipo)
-                                print('el team es %s' % team)
+                                print('el team es %s' % team.name)
                                 if team.name == local:
                                     encontrado = (q[0].words)
                                     local_lineupid += encontrado.name
@@ -105,7 +105,7 @@ class Command(BaseCommand):
                             for x in q:
                                 ekipo = x.team.name
                                 team = Team.objects.get(name=ekipo)
-                                print('el team es %s' % team)
+                                print('el team es %s' % team.name)
                                 if team.name == visitante:
                                     encontrado = (q[0].words)
                                     local_lineupid += encontrado.name
