@@ -26,7 +26,7 @@ class Command(BaseCommand):
                             nombre = p['id']
                             player = Player.objects.get(name=nombre)
                             print('YA CREADO')
-                            player.update(words=p['name']
+                            player.update(words=p['name'])
                             print('update del nombre del jugador %s' % words)
                             player.save()
                             i.save()
