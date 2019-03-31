@@ -31,6 +31,7 @@ class Command(BaseCommand):
                             player.save()
                             i.save()
                         except Exception as e:
+                            pass
                             print(e)
                             edad = 2019 - int(p['dateOfBirth'][0:4])
                             w = p['name']      
