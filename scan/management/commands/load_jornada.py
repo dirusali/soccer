@@ -34,8 +34,10 @@ class Command(BaseCommand):
             try:
                 p = Match.objects.get(matchid=i)
                 local = p.local.name
+                print('EL EKIPO LOCAL ES %s' % local)
                 visitante = p.visitor.name
                 match = ('%s - %s' % (local,visitante))
+                print('EL EKIPO VISITANTE ES %s' % visitante)
                 count+=1
                 url = urls[count-1]
                 response = requests.get(url, timeout=10).text
@@ -78,7 +80,6 @@ class Command(BaseCommand):
                             q = Player.objects.filter(words__icontains=z)
                             for x in q:
                                 ekipo = x.team
-                                print(ekipo.name)
                                 if x.team == local:
                                     encontrado = (q[0].words)
                                     local_lineupid += encontrado.name
@@ -102,7 +103,7 @@ class Command(BaseCommand):
                             for x in q:
                                 ekipo = x.team
                                 print(ekipo.name)
-                                if x.team == visitante:
+                                if ekipo == visitante:
                                     encontrado = (q[0].words)
                                     local_lineupid += encontrado.name
                                     print('buscamos %s y encontramos %s' %(i, encontrado))
