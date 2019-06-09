@@ -11,6 +11,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         local_lineup_name = input("Indica la alineacion local: ")
         visitor_lineup_name = input("Indica la alineacion visitante: ")
+        print('has elegido el local: %s' % (local_lineup_name))
+        print('has elegido el visitante: %s' % (visitor_lineup_name))
         local = Lineup.objects.get(name=local_lineup_name)
         visitor = Lineup.objects.get(name=visitor_lineup_name)
         localplayers=Lineup.objects.get(name=local_lineup_name).values('players')
