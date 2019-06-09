@@ -21,7 +21,7 @@ class Command(BaseCommand):
             player = Players.objects.get(id=p.id)
             print(player.name)   
         print('El equipo visitante juega con:')
-            for i in visitorplayers:
+        for i in visitorplayers:
             p = i.get('players',None)
             player = Players.objects.get(id=p.id)
             print(player.name)
