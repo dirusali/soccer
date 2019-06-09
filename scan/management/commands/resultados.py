@@ -27,11 +27,13 @@ class Command(BaseCommand):
             p = i.get('players',None)
             player = Player.objects.get(id=p)
             print(player.words)
-        split = local.total - visitor.total
         if local.total > visitor.total:
-            winner = local.name
+            winner = local
+            loser = visitor
         if local.total < visitor.total:
-            winner = visitor.name
+            winner = visitor
+            loser = visitor        
+        split = winner.total - loser.total    
         print('LA PREDICCION DE RESULTADO ES:')
         print('Linea de Split: %s %s' % (split,winner)) 
      
