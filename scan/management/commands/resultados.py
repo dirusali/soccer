@@ -27,12 +27,10 @@ class Command(BaseCommand):
             p = i.get('players',None)
             player = Player.objects.get(id=p)
             print(player.words)
-        print('la goaldif del local es %s' % local.goaldif)
-        print('la goaldif del visitante es %s' % visitor.goaldif)
-        split = local.goaldif - visitor.goaldif
-        if local.goaldif > visitor.goaldif:
+        split = local.total - visitor.total
+        if local.total > visitor.total:
             winner = local.name
-        if local.goaldif < visitor.goaldif:
+        if local.total < visitor.total:
             winner = visitor.name
         print('LA PREDICCION DE RESULTADO ES:')
         print('Linea de Split: %s %s' % (split,winner)) 
