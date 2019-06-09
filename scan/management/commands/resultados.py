@@ -9,8 +9,8 @@ import json
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        local_lineup_name = input("Indica la alineacion local: ")
-        visitor_lineup_name = input("Indica la alineacion visitante: ")
+        local_lineup_name = input("Indica la alineacion local:")
+        visitor_lineup_name = input("Indica la alineacion visitante:")
         print('has elegido el local: %s' % (local_lineup_name))
         print('has elegido el visitante: %s' % (visitor_lineup_name))
         local = Lineup.objects.get(name=local_lineup_name)
