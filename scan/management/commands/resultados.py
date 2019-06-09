@@ -35,5 +35,5 @@ class Command(BaseCommand):
             loser = local      
         split = winner.total - loser.total    
         print('LA PREDICCION DE RESULTADO ES:')
-        print('Linea de Split: %s %s' % (split,winner)) 
+        print('Linea de Split: %s %s' % (split,winner.name)) 
      
