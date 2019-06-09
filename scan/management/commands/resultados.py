@@ -20,12 +20,12 @@ class Command(BaseCommand):
         print('El equipo local juega con:')
         for i in localplayers:
             p =i.get('players',None)
-            player = Player.objects.get(id=p.id)
+            player = Player.objects.get(id=p)
             print(player.name)   
         print('El equipo visitante juega con:')
         for i in visitorplayers:
             p = i.get('players',None)
-            player = Player.objects.get(id=p.id)
+            player = Player.objects.get(id=p)
             print(player.name)
         
 
