@@ -15,8 +15,8 @@ class Command(BaseCommand):
         print('has elegido el visitante: %s' % (visitor_lineup_name))
         local = Lineup.objects.get(name=local_lineup_name)
         visitor = Lineup.objects.get(name=visitor_lineup_name)
-        localplayers=Lineup.objects.get(name=local_lineup_name).values('players')
-        visitorplayers = Lineup.objects.get(name=visitor_lineup_name).values('players')
+        localplayers=Lineup.objects.filter(name=local_lineup_name).values('players')
+        visitorplayers = Lineup.objects.filter(name=visitor_lineup_name).values('players')
         print('El equipo local juega con:')
         for i in localplayers:
             p =i.get('players',None)
