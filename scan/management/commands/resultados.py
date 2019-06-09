@@ -32,7 +32,7 @@ class Command(BaseCommand):
             loser = visitor
         if local.total < visitor.total:
             winner = visitor
-            loser = visitor        
+            loser = local      
         split = winner.total - loser.total    
         print('LA PREDICCION DE RESULTADO ES:')
         print('Linea de Split: %s %s' % (split,winner)) 
